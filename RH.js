@@ -9,6 +9,7 @@ window.augmenterTempsDeTravail = () => {
     if (game.workStartHour === 0 && game.workEndHour === 24) {
       game.fullTime = true;
     }
+    game.cdf -= 1;
   }
 
   updateUI();

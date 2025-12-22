@@ -38,10 +38,10 @@ window.startGame = () => {
   setInterval(() => {
     if (game.gameStarted && isWorkHour()) {
       game.cadeaux += game.lutins;
-      game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
-      game.argent += game.enfants * game.eurosPerChild;
     }
     game.gameTime = addHours(game.gameTime, 1);
+    game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
+    game.argent += game.enfants * game.eurosPerChild;
     updateUI();
   }, 2000);
 };
