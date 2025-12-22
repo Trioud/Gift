@@ -77,3 +77,36 @@ function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
+
+// Fonction pour toggle les fenêtres (minimiser/maximiser)
+window.toggleWindow = (event, windowElement) => {
+  event.stopPropagation(); // Empêcher le drag
+  const windowBody = windowElement.querySelector(".window-body");
+  const toggleBtn = windowElement.querySelector(".window-toggle");
+  if (windowBody && toggleBtn) {
+    const isHidden = windowBody.style.display === "none";
+    windowBody.style.display = isHidden ? "block" : "none";
+    toggleBtn.textContent = isHidden ? "−" : "+";
+  }
+};
+
+// Fonction pour initialiser les boutons de toggle
+function initWindowToggles() {
+  document.querySelectorAll(".window.box").forEach((windowEl) => {
+    const titleBar = windowEl.querySelector(".title-bar");
+    if (titleBar && !titleBar.querySelector(".window-toggle")) {
+      const toggleBtn = document.createElement("button");
+      toggleBtn.className = "window-toggle";
+      toggleBtn.textContent = "−";
+      toggleBtn.onclick = (e) => window.toggleWindow(e, windowEl);
+      titleBar.appendChild(toggleBtn);
+    }
+  });
+}
+
+// Initialiser au chargement
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initWindowToggles);
+} else {
+  initWindowToggles();
+}

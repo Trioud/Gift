@@ -22,6 +22,41 @@ export let game = {
   gameTime: new Date(2025, 0, 1, 9, 0, 0),
   gameStarted: false,
   marketingTier: 0,
+  achievement: [
+    {
+      label: "100 lettres d'enfants",
+      threshold: 100,
+      message:
+        "Romeo, Ruben et Martin ont enfin reçu leurs cadeaux ! Mais ils en veulent plus... les petits gourmands ! 🎁",
+      active: 0,
+    },
+    {
+      label: "1000 lettres d'enfants",
+      threshold: 1000,
+      message:
+        "Romeo, Ruben et Martin sont maintenant des influenceurs ! Ils ont convaincu tous leurs copains d'écrire au Père Noël... euh, à vous ! 📮",
+      active: 0,
+    },
+    {
+      label: "10000 lettres d'enfants",
+      threshold: 10000,
+      message:
+        "Romeo, Ruben et Martin dirigent maintenant une armée d'enfants ! Le Père Noël va avoir besoin d'un avocat... 😈",
+      active: 0,
+    },
+    {
+      label: "100000 lettres d'enfants",
+      threshold: 100000,
+      message: "Romeo, Ruben et Martin ont envahi le Monde !",
+      active: 0,
+    },
+    {
+      label: "1000000 lettres d'enfants",
+      threshold: 1000000,
+      message: "Romeo, Ruben et Martin ont envahi la Galaxy !",
+      active: 0,
+    },
+  ],
   upgrades: {
     marketing: {
       mascotte: {
@@ -108,6 +143,7 @@ export let game = {
 };
 
 import { availability } from "./availability.js";
+import { checkAchievements, updateAchievementsUI } from "./achievements.js";
 
 function isWorkHour() {
   if (game.fullTime) return true;
@@ -283,6 +319,9 @@ export function updateUI() {
     }
   }
   availability();
+
+  checkAchievements();
+  updateAchievementsUI();
 }
 
 updateUI();

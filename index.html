@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CHRISTMAS HUV</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/party-js@2/bundle/party.min.js"></script>
   </head>
   <body>
     <canvas id="gameCanvas"></canvas>
@@ -122,6 +123,20 @@
         <button onclick="elfSchedule()">Augmenter les horaires de travail des lutins</button><br>
         <button onclick="nightClub()">Construction d'une discothèque pour RH (INTERDIT AUX LUTINS)</button><br>
         <button onclick="sabotageCoin()">Acheter un sabotage coin</button>
+      </div>
+    </div>
+
+    <div
+      class="window box"
+      data-threshold="0"
+      data-world-x="500"
+      data-world-y="500"
+    >
+      <div class="title-bar">
+        <div class="title-bar-text">Achievements</div>
+      </div>
+      <div class="window-body" id="achievements-list">
+        <!-- Les achievements seront affichés ici -->
       </div>
     </div>
 
