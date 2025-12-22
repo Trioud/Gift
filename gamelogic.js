@@ -6,7 +6,7 @@ export const numberFormatter = new Intl.NumberFormat("fr-FR");
 
 export let game = {
   argent: 0,
-  cadeaux: 10000,
+  cadeaux: 0,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
