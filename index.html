@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeu Incremental</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      background: #111;
+      cursor: grab;
+    }
+    #ui {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      font-family: sans-serif;
+      font-size: 1.2rem;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 12px;
+      border-radius: 8px;
+      z-index: 10;
+    }
+    #ui button {
+      position: relative;
+      margin-top: 10px;
+      font-size: 1rem;
+      padding: 6px 12px;
+      background-color: #0af;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #ui button:hover {
+      background-color: #08c;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+  <div id="ui">
+    <p>Euros & Heure : <span id="goldCount">€0</span></p>
+    <!-- Le bouton 'Emballer le cadeau' est injecté dynamiquement par script.js -->
+  </div>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
