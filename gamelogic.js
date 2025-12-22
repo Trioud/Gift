@@ -128,7 +128,7 @@ export let game = {
         label: "Motiver le service Marketing 🗣️",
         price: 1,
         current: 0,
-        limit: 5,
+        limit: 3,
         reduction: 0.5,
       },
       elfSchedule: {

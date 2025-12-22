@@ -7,13 +7,9 @@ function buyUpgrade(key, effectFn) {
   const upgrade = RHUpgrades[key];
 
   if (upgrade.limit === 0) return;
-  if (RHUpgrades.cdf < upgrade.price) return;
+  if (game.cdf < upgrade.price) return;
 
-  RHUpgrades.cdf -= upgrade.price;
-
-  if (upgrade.limit > 0) {
-    upgrade.limit -= 1;
-  }
+  game.cdf -= upgrade.price;
 
   effectFn();
   updateUI();
@@ -36,6 +32,8 @@ window.marketingEfficiency = () => {
 
 window.marketingUpgrade = () => {
   buyUpgrade("marketingUpgrade", () => {
+    console.log(RHUpgrades.marketingUpgrade);
+    RHUpgrades.marketingUpgrade.current += 1;
     game.marketingTier += 1;
   });
 };
