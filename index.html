@@ -18,36 +18,37 @@
     <p style="display:none" data-threshold="1">Sabotage Coins : <span id="sabotage">0</span></p>
     <p style="display:none">Heure : <span id="horloge">--</span></p>
   </div>
-  <div class="window box" style="left: 380px; top: 50px;">
-    <div class="title-bar"><div class="title-bar-text">Station d'emballage</div></div>
-    <div class="window-body">
-      <button onclick="emballerManuellement()">Emballer un cadeau (à la main)</button><br>
-      <button onclick="miner()">Tapis Roulant</button><br>
-      <button onclick="acheterLutin()">Acheter un Lutin</button><br>
-    </div>
+  <div class="window box" data-world-x="380" data-world-y="50">
+  <div class="title-bar"><div class="title-bar-text">Station d'emballage</div></div>
+  <div class="window-body">
+    <button onclick="emballerManuellement()">Emballer un cadeau (à la main)</button><br>
+    <button onclick="acheterLutin()">Embaucher un Lutin</button><br>
+    <button data-child-treshold="100" style="display: none" onclick="convoyerbelt()">Tapis Roulant</button><br>
   </div>
+</div>
 
-  <div class="window box" data-threshold="1000" style="display:none; left: 60px; top: 380px;">
-    <div class="title-bar"><div class="title-bar-text">Marketing</div></div>
-    <div class="window-body">
-      <button>Post Instagroom</button><br>
-      <button>Pub avec de l'IA</button>
-    </div>
+<div class="window box" data-threshold="1000" data-world-x="60" data-world-y="380" style="display: none;">
+  <div class="title-bar"><div class="title-bar-text">Marketing</div></div>
+  <div class="window-body">
+    <button onclick="instagroom()">Post Instagroom</button><br>
+    <button>Pub avec de l'IA</button>
   </div>
+</div>
 
-  <div class="window box" data-threshold="10000" style="display:none; left: 380px; top: 380px;">
-    <div class="title-bar"><div class="title-bar-text">Département RH</div></div>
-    <div class="window-body">
-      <button onclick="feteRH()">Fête des RH</button>
-    </div>
+<div class="window box" data-threshold="10000" data-world-x="380" data-world-y="380" style="display: none;">
+  <div class="title-bar"><div class="title-bar-text">Département RH</div></div>
+  <div class="window-body">
+    <button onclick="feteRH()">Fête des RH</button>
   </div>
+</div>
 
-  <div class="window box" data-threshold="100000" style="display:none; left: 700px; top: 380px;">
-    <div class="title-bar"><div class="title-bar-text">Sabotage</div></div>
-    <div class="window-body">
-      <button onclick="utiliserSabotage()">Générer un Sabotage Coin</button>
-    </div>
+<div class="window box" data-threshold="100000" data-world-x="700" data-world-y="380" style="display: none;">
+  <div class="title-bar"><div class="title-bar-text">Sabotage</div></div>
+  <div class="window-body">
+    <button onclick="utiliserSabotage()">Générer un Sabotage Coin</button>
   </div>
+</div>
+
 
   <script type="module" src="./gamelogic.js"></script>
   <script type="module" src="./canvas.js"></script>

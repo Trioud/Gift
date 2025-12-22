@@ -1,3 +1,8 @@
+* {
+  user-select: none;
+  cursor: move;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -44,6 +49,11 @@ canvas {
   font-weight: bold;
   border-bottom: 1px solid #999;
   margin-bottom: 8px;
+  cursor: grab !important;
+}
+
+.title-bar-text {
+    cursor: grab !important;  
 }
 
 .title-bar-text {
