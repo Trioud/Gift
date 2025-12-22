@@ -22,7 +22,19 @@ window.startGame = () => {
   game.gameStarted = true;
   document.getElementById("station").style.display = "block";
   document.getElementById("missionScreen").style.display = "none";
+  setInterval(() => {
+    game.cadeaux += game.lutins;
+    game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
+    game.argent += game.enfants * game.eurosPerChild;
+    game.gameTime = addHours(game.gameTime, 1);
+    updateUI();
+  }, 2000);
 };
+
+if (!game.gameStarted) {
+  const el = document.getElementById("station");
+  el.style.display = "none";
+}
 
 window.conveyerbelt = () => {
   if (game.enfants >= 100 && game.argent >= 5000 && !game.conveyorActive) {
@@ -142,19 +154,6 @@ function updateUI() {
 
   toggleModules();
   toggleSubModules();
-}
-
-if (!game.gameStarted) {
-  const el = document.getElementById("station");
-  el.style.display = "none";
-} else {
-  setInterval(() => {
-    game.cadeaux += game.lutins;
-    game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
-    game.argent += game.enfants * game.eurosPerChild;
-    game.gameTime = addHours(game.gameTime, 1);
-    updateUI();
-  }, 2000);
 }
 
 updateUI();
