@@ -1,56 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CHRISTMAS HUV</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <canvas id="gameCanvas"></canvas>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CHRISTMAS HUV</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
+    <div id="missionScreen" class="fullscreen-overlay">
+      <div class="mission-content">
+        <h1>🎄 PROJET HUB ACCEPTÉ 🎁</h1>
+        <p>
+          Ruben & Martin sont très mécontents des cadeaux qu'ils ont eu le Noël
+          dernier.
+        </p>
+        <p>Ils ont tous les deux reçu du charbon de la part du Père Noël.</p>
+        <p>
+          Ils vous ont sélectionné pour créer un projet HUB afin de le remplacer
+          définitivement.
+        </p>
+        <p>
+          <strong
+            >Utilisez cet outil de planning pour pouvoir vous assurez que les
+            enfants sont plus intéressés par votre projet de livraison que le
+            projet du Père Noël</strong
+          >
+        </p>
+        <button onclick="startGame()">Commencer le projet HUB</button>
+      </div>
+    </div>
+    <div id="ui">
+      <p style="display: none" data-threshold="0">
+        Argent : <span id="argent">0</span>
+      </p>
+      <p style="display: none" data-threshold="0">
+        Cadeaux : <span id="cadeaux">0</span>
+      </p>
+      <p style="display: none" data-threshold="0">
+        Enfants : <span id="enfants">0</span>
+      </p>
+      <p style="display: none" data-threshold="1">
+        Lutins : <span id="lutins">0</span>
+      </p>
+      <p style="display: none" data-threshold="1">
+        Multiplicateur RH : x<span id="rhMulti">1</span>
+      </p>
+      <p style="display: none" data-threshold="1">
+        Sabotage Coins : <span id="sabotage">0</span>
+      </p>
+      <p style="display: none">Heure : <span id="horloge">--</span></p>
+    </div>
+    <div class="window box" id="station" data-world-x="380" data-world-y="50">
+      <div class="title-bar">
+        <div class="title-bar-text">Station d'emballage</div>
+      </div>
+      <div class="window-body">
+        <button onclick="emballerManuellement()">
+          Emballer un cadeau (à la main)</button
+        ><br />
+        <button onclick="acheterLutin()">Embaucher un Lutin</button><br />
+        <button
+          data-child-treshold="100"
+          style="display: none"
+          onclick="convoyerbelt()"
+        >
+          Tapis Roulant</button
+        ><br />
+      </div>
+    </div>
 
-  <div id="ui">
-    <p style="display:none" data-threshold="0">Argent : <span id="argent">0</span></p>
-    <p style="display:none" data-threshold="0">Cadeaux : <span id="cadeaux">0</span></p>
-    <p style="display:none" data-threshold="0">Enfants : <span id="enfants">0</span></p>
-    <p style="display:none" data-threshold="1">Lutins : <span id="lutins">0</span></p>
-    <p style="display:none" data-threshold="1">Multiplicateur RH : x<span id="rhMulti">1</span></p>
-    <p style="display:none" data-threshold="1">Sabotage Coins : <span id="sabotage">0</span></p>
-    <p style="display:none">Heure : <span id="horloge">--</span></p>
-  </div>
-  <div class="window box" data-world-x="380" data-world-y="50">
-  <div class="title-bar"><div class="title-bar-text">Station d'emballage</div></div>
-  <div class="window-body">
-    <button onclick="emballerManuellement()">Emballer un cadeau (à la main)</button><br>
-    <button onclick="acheterLutin()">Embaucher un Lutin</button><br>
-    <button data-child-treshold="100" style="display: none" onclick="convoyerbelt()">Tapis Roulant</button><br>
-  </div>
-</div>
+    <div
+      class="window box"
+      data-threshold="1000"
+      data-world-x="60"
+      data-world-y="380"
+      style="display: none"
+    >
+      <div class="title-bar"><div class="title-bar-text">Marketing</div></div>
+      <div class="window-body">
+        <button onclick="instagroom()">Post Instagroom</button><br />
+        <button>Pub avec de l'IA</button>
+      </div>
+    </div>
 
-<div class="window box" data-threshold="1000" data-world-x="60" data-world-y="380" style="display: none;">
-  <div class="title-bar"><div class="title-bar-text">Marketing</div></div>
-  <div class="window-body">
-    <button onclick="instagroom()">Post Instagroom</button><br>
-    <button>Pub avec de l'IA</button>
-  </div>
-</div>
+    <div
+      class="window box"
+      data-threshold="10000"
+      data-world-x="380"
+      data-world-y="380"
+      style="display: none"
+    >
+      <div class="title-bar">
+        <div class="title-bar-text">Département RH</div>
+      </div>
+      <div class="window-body">
+        <button onclick="feteRH()">Fête des RH</button>
+      </div>
+    </div>
 
-<div class="window box" data-threshold="10000" data-world-x="380" data-world-y="380" style="display: none;">
-  <div class="title-bar"><div class="title-bar-text">Département RH</div></div>
-  <div class="window-body">
-    <button onclick="feteRH()">Fête des RH</button>
-  </div>
-</div>
+    <div
+      class="window box"
+      data-threshold="100000"
+      data-world-x="700"
+      data-world-y="380"
+      style="display: none"
+    >
+      <div class="title-bar"><div class="title-bar-text">Sabotage</div></div>
+      <div class="window-body">
+        <button onclick="utiliserSabotage()">Générer un Sabotage Coin</button>
+      </div>
+    </div>
 
-<div class="window box" data-threshold="100000" data-world-x="700" data-world-y="380" style="display: none;">
-  <div class="title-bar"><div class="title-bar-text">Sabotage</div></div>
-  <div class="window-body">
-    <button onclick="utiliserSabotage()">Générer un Sabotage Coin</button>
-  </div>
-</div>
-
-
-  <script type="module" src="./gamelogic.js"></script>
-  <script type="module" src="./canvas.js"></script>
-</body>
+    <script type="module" src="./gamelogic.js"></script>
+    <script type="module" src="./canvas.js"></script>
+  </body>
 </html>
