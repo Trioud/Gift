@@ -2,6 +2,8 @@
 import { format, addHours } from "https://cdn.skypack.dev/date-fns@2.30.0";
 import { toggleConvoyer } from "./conveyor.js";
 
+const numberFormatter = new Intl.NumberFormat("fr-FR");
+
 export let game = {
   argent: 0,
   cadeaux: 5000000000,
@@ -137,7 +139,11 @@ function updateStat(id, value, prefix = "", unit = "") {
 
   if (shouldDisplay) {
     wrapper.style.display = "block";
-    el.textContent = `${prefix}${value}${unit}`;
+
+    const formatted =
+      typeof value === "number" ? numberFormatter.format(value) : value;
+
+    el.textContent = `${prefix}${formatted}${unit}`;
   } else {
     wrapper.style.display = "none";
   }
@@ -162,7 +168,9 @@ export function updateUI() {
     'button[onclick="acheterLutin()"]'
   );
   if (lutinButton) {
-    lutinButton.textContent = `Embaucher un Lutin (€${game.elfCost})`;
+    lutinButton.textContent = `Embaucher un Lutin (€${numberFormatter.format(
+      game.elfCost
+    )})`;
   }
 
   toggleModules();
