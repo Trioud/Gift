@@ -1,12 +1,20 @@
 // gamelogic.js
-import { format, addHours } from "https://cdn.skypack.dev/date-fns@2.30.0";
+import {
+  format,
+  addHours,
+  isEqual,
+  isAfter,
+} from "https://cdn.skypack.dev/date-fns@2.30.0";
 import { toggleConvoyer } from "./conveyor.js";
+import { finishGame } from "./finalcondition.js";
 
 export const numberFormatter = new Intl.NumberFormat("fr-FR");
 
+const endTime = new Date(2025, 11, 25, 0, 0, 0);
+
 export let game = {
   argent: 0,
-  cadeaux: 0,
+  cadeaux: 100,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -22,6 +30,7 @@ export let game = {
   gameTime: new Date(2025, 0, 1, 9, 0, 0),
   gameStarted: false,
   marketingTier: 0,
+  gameEnded: false,
   achievement: [
     {
       label: "100 lettres d'enfants",
@@ -157,13 +166,32 @@ window.startGame = () => {
   document.getElementById("missionScreen").style.display = "none";
   document.getElementById("station").style.display = "block";
   document.getElementById("child").style.display = "block";
-  setInterval(() => {
+  document.getElementById("achievements").style.display = "block";
+
+  let tick = setInterval(() => {
+    if (isWorkHour() && game.lutins > 0) {
+      document.getElementById("gameCanvas").style.backgroundImage =
+        "url('./assets/background-people.png')";
+    } else {
+      document.getElementById("gameCanvas").style.backgroundImage =
+        "url('./assets/test-background.png')";
+    }
     if (game.gameStarted && isWorkHour()) {
       game.cadeaux += game.lutins;
     }
+
     game.gameTime = addHours(game.gameTime, 1);
     game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
     game.argent += game.enfants * game.eurosPerChild;
+
+    if (
+      !game.gameEnded &&
+      (isEqual(game.gameTime, endTime) || isAfter(game.gameTime, endTime))
+    ) {
+      //alert("HELLO");
+      //game.gameEnded = true;
+      finishGame(tick);
+    }
     updateUI();
   }, 1000);
 };
