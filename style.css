@@ -40,12 +40,26 @@ canvas {
   top: 10px;
   left: 10px;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 8px 12px;
+  background: #eaeaea;
   border-radius: 6px;
   color: #fff;
   font-size: 0.9rem;
   line-height: 1.5;
+  border: 2px solid #444;
+  box-shadow: 3px 3px 0 #222;
+  padding: 5px;
+  color: black;
+}
+
+.ui {
+  padding: 8px 5px 0px 5px;
+}
+
+.ui-title {
+  background: linear-gradient(90deg, #013afb, #3366ff);
+  padding: 10px;
+  color: whitesmoke;
+  font-weight: bold;
 }
 
 .window.box {
@@ -62,14 +76,16 @@ canvas {
 
 .title-bar {
   background: #ccc;
-  padding: 6px;
+  padding: 3px;
   font-weight: bold;
   border-bottom: 1px solid #999;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
   cursor: grab !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: linear-gradient(90deg, #013afb, #3366ff);
+  color: whitesmoke;
 }
 
 .title-bar-text {
