@@ -12,7 +12,7 @@ export let game = {
   workStartHour: 6,
   workEndHour: 18,
   fullTime: false,
-  feteRH: 0,
+  cdf: 0,
   sabotages: 0,
   giftsPerChild: 5,
   eurosPerChild: 2,
@@ -80,16 +80,16 @@ window.emballerManuellement = () => {
 
 window.feteRH = () => {
   if (game.argent > 0) {
-    game.feteRH += 1;
+    game.cdf += 1;
     game.argent = 0;
     updateUI();
   }
 };
 
 window.utiliserSabotage = () => {
-  if (game.feteRH >= 5) {
+  if (game.cdf >= 5) {
     game.sabotages += 1;
-    game.feteRH -= 5;
+    game.cdf -= 5;
     updateUI();
   }
 };
@@ -155,7 +155,7 @@ export function updateUI() {
   updateStat("enfants", game.enfants);
   updateStat("lutins", game.lutins);
   updateStat("sabotage", game.sabotages);
-  updateStat("rh", game.feteRH);
+  updateStat("cdf", game.cdf);
 
   const time = document.getElementById("horloge");
   const timeParent = time?.parentElement;
@@ -183,6 +183,50 @@ export function updateUI() {
     } else {
       horaires.textContent = `Les lutins travaillent de ${game.workStartHour}h00 à ${game.workEndHour}h00`;
     }
+  }
+  // Instagroom
+  const instagroomBtn = document.querySelector(
+    'button[onclick="instagroom()"]'
+  );
+  if (instagroomBtn) {
+    const maxed = game.giftsPerChild <= 1;
+    const affordable = game.argent >= 5000;
+    instagroomBtn.classList.toggle("disabled", !affordable || maxed);
+    instagroomBtn.disabled = !affordable || maxed;
+  }
+
+  // Fête des RH
+  const rhBtn = document.querySelector('button[onclick="feteRH()"]');
+  if (rhBtn) {
+    rhBtn.classList.toggle("disabled", game.argent <= 0);
+    rhBtn.disabled = game.argent <= 0;
+  }
+
+  // Sabotage
+  const sabotageBtn = document.querySelector(
+    'button[onclick="utiliserSabotage()"]'
+  );
+  if (sabotageBtn) {
+    sabotageBtn.classList.toggle("disabled", game.feteRH < 5);
+    sabotageBtn.disabled = game.feteRH < 5;
+  }
+
+  // Acheter un Lutin
+  const lutinBtn = document.querySelector('button[onclick="acheterLutin()"]');
+  if (lutinBtn) {
+    lutinBtn.classList.toggle("disabled", game.argent < game.elfCost);
+    lutinBtn.disabled = game.argent < game.elfCost;
+  }
+
+  // Tapis Roulant
+  const conveyorBtn = document.querySelector(
+    'button[onclick="conveyerbelt()"]'
+  );
+  if (conveyorBtn) {
+    const blocked =
+      game.conveyorActive || game.argent < 5000 || game.enfants < 100;
+    conveyorBtn.classList.toggle("disabled", blocked);
+    conveyorBtn.disabled = blocked;
   }
 }
 

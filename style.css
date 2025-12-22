@@ -115,3 +115,10 @@ button:hover {
   font-size: 1.2em;
   cursor: pointer;
 }
+
+.disabled {
+  text-shadow: 1px 1px 0 #fff;
+  color: grey;
+  pointer-events: none;
+  opacity: 0.6;
+}
