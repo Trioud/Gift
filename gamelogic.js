@@ -4,7 +4,7 @@ import { toggleConvoyer } from "./conveyor.js";
 
 export let game = {
   argent: 0,
-  cadeaux: 5000,
+  cadeaux: 5000000000,
   enfants: 0,
   lutins: 0,
   feteRH: 0,
@@ -136,7 +136,7 @@ export function updateUI() {
   updateStat("enfants", game.enfants);
   updateStat("lutins", game.lutins);
   updateStat("sabotage", game.sabotages);
-  updateStat("feteRH", game.feteRH);
+  updateStat("rh", game.feteRH);
 
   const time = document.getElementById("horloge");
   const timeParent = time?.parentElement;
