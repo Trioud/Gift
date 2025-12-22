@@ -166,6 +166,29 @@ function isWorkHour() {
   return hour >= game.workStartHour && hour < game.workEndHour;
 }
 
+let currentCanvas = "";
+
+function changeCanvasBackground(newUrl) {
+  const bgDiv = document.getElementById("bgTransition");
+
+  // Prevent reapplying the same background
+  if (newUrl === currentCanvas) return;
+
+  // Start fade-in with new background
+  bgDiv.style.backgroundImage = `url('${newUrl}')`;
+  bgDiv.style.opacity = 0;
+
+  setTimeout(() => {
+    // Fade out the transition overlay
+    if (newUrl == "./assets/background-people.png") {
+      bgDiv.style.opacity = 1;
+    } else {
+      bgDiv.style.opacity = 0.4;
+    }
+    currentCanvas = newUrl;
+  }, 200); // Match the CSS transition duration
+}
+
 window.startGame = () => {
   game.gameStarted = true;
   document.getElementById("missionScreen").style.display = "none";
@@ -173,14 +196,14 @@ window.startGame = () => {
   document.getElementById("child").style.display = "block";
   document.getElementById("achievements").style.display = "block";
 
+  changeCanvasBackground("./assets/test-background.png");
+
   let tick = setInterval(() => {
-    if (isWorkHour() && game.lutins > 0) {
-      document.getElementById("gameCanvas").style.backgroundImage =
-        "url('./assets/background-people.png')";
-    } else {
-      document.getElementById("gameCanvas").style.backgroundImage =
-        "url('./assets/test-background.png')";
-    }
+    const activeBg =
+      isWorkHour() && game.lutins > 0
+        ? "./assets/background-people.png"
+        : "./assets/test-background.png";
+    changeCanvasBackground(activeBg);
     if (game.gameStarted && isWorkHour()) {
       game.cadeaux += game.lutins;
     }
