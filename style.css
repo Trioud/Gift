@@ -69,6 +69,27 @@ canvas {
   font-size: 1rem;
 }
 
+.window-toggle {
+  margin-left: auto !important;
+  padding: 2px 8px !important;
+  font-size: 1.2em !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  background: #aaa !important;
+  border: 1px solid #888 !important;
+  border-radius: 2px !important;
+  color: #fff !important;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.window-toggle:hover {
+  background: #888 !important;
+}
+
 .window-body {
   padding: 6px 0;
 }
@@ -129,4 +150,65 @@ button:hover {
   color: grey;
   pointer-events: none;
   opacity: 0.6;
+}
+
+.achievement-popup {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  z-index: 3000;
+  min-width: 300px;
+  max-width: 400px;
+  border-left: 4px solid rgba(255, 255, 255, 0.5);
+  animation: toastSlideIn 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.achievement-popup h3 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.achievement-popup p {
+  margin: 0;
+  font-size: 0.9em;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.achievement-popup.toast-exit {
+  animation: toastSlideOut 0.3s ease-in forwards;
+}
+
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+  }
 }
