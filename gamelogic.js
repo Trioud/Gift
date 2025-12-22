@@ -14,7 +14,7 @@ const endTime = new Date(2025, 11, 25, 0, 0, 0);
 
 export let game = {
   argent: 0,
-  cadeaux: 100,
+  cadeaux: 500000,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -358,7 +358,7 @@ export function updateUI() {
     'button[onclick="acheterLutin()"]'
   );
   if (lutinButton) {
-    lutinButton.textContent = `Embaucher un Lutin (€${numberFormatter.format(
+    lutinButton.textContent = `Embaucher un TEK1 (€${numberFormatter.format(
       game.elfCost
     )})`;
   }
