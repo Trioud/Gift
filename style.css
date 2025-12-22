@@ -1,0 +1,70 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #111;
+  font-family: sans-serif;
+}
+
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+#ui {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.window.box {
+  position: absolute;
+  background: #eaeaea;
+  border: 2px solid #444;
+  box-shadow: 3px 3px 0 #222;
+  padding: 10px;
+  min-width: 220px;
+  z-index: 10;
+  border-radius: 4px;
+}
+
+.title-bar {
+  background: #ccc;
+  padding: 6px;
+  font-weight: bold;
+  border-bottom: 1px solid #999;
+  margin-bottom: 8px;
+}
+
+.title-bar-text {
+  font-size: 1rem;
+}
+
+.window-body {
+  padding: 6px 0;
+}
+
+button {
+  background: #0af;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin: 4px 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+button:hover {
+  background: #08c;
+}

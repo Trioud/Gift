@@ -3,51 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jeu Incremental</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    canvas {
-      display: block;
-      background: #111;
-      cursor: grab;
-    }
-    #ui {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      color: white;
-      font-family: sans-serif;
-      font-size: 1.2rem;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 8px 12px;
-      border-radius: 8px;
-      z-index: 10;
-    }
-    #ui button {
-      position: relative;
-      margin-top: 10px;
-      font-size: 1rem;
-      padding: 6px 12px;
-      background-color: #0af;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    #ui button:hover {
-      background-color: #08c;
-    }
-  </style>
+  <title>CHRISTMAS HUV</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <canvas id="gameCanvas"></canvas>
+
   <div id="ui">
-    <p>Euros & Heure : <span id="goldCount">€0</span></p>
-    <!-- Le bouton 'Emballer le cadeau' est injecté dynamiquement par script.js -->
+    <p style="display:none" data-threshold="0">Argent : <span id="argent">0</span></p>
+    <p style="display:none" data-threshold="0">Cadeaux : <span id="cadeaux">0</span></p>
+    <p style="display:none" data-threshold="0">Enfants : <span id="enfants">0</span></p>
+    <p style="display:none" data-threshold="1">Lutins : <span id="lutins">0</span></p>
+    <p style="display:none" data-threshold="1">Multiplicateur RH : x<span id="rhMulti">1</span></p>
+    <p style="display:none" data-threshold="1">Sabotage Coins : <span id="sabotage">0</span></p>
+    <p style="display:none">Heure : <span id="horloge">--</span></p>
+  </div>
+  <div class="window box" style="left: 380px; top: 50px;">
+    <div class="title-bar"><div class="title-bar-text">Station d'emballage</div></div>
+    <div class="window-body">
+      <button onclick="emballerManuellement()">Emballer un cadeau (à la main)</button><br>
+      <button onclick="miner()">Tapis Roulant</button><br>
+      <button onclick="acheterLutin()">Acheter un Lutin</button><br>
+    </div>
+  </div>
+
+  <div class="window box" data-threshold="1000" style="display:none; left: 60px; top: 380px;">
+    <div class="title-bar"><div class="title-bar-text">Marketing</div></div>
+    <div class="window-body">
+      <button>Post Instagroom</button><br>
+      <button>Pub avec de l'IA</button>
+    </div>
+  </div>
+
+  <div class="window box" data-threshold="10000" style="display:none; left: 380px; top: 380px;">
+    <div class="title-bar"><div class="title-bar-text">Département RH</div></div>
+    <div class="window-body">
+      <button onclick="feteRH()">Fête des RH</button>
+    </div>
+  </div>
+
+  <div class="window box" data-threshold="100000" style="display:none; left: 700px; top: 380px;">
+    <div class="title-bar"><div class="title-bar-text">Sabotage</div></div>
+    <div class="window-body">
+      <button onclick="utiliserSabotage()">Générer un Sabotage Coin</button>
+    </div>
   </div>
 
   <script type="module" src="./gamelogic.js"></script>
