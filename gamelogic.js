@@ -14,7 +14,7 @@ const endTime = new Date(2025, 11, 25, 0, 0, 0);
 
 export let game = {
   argent: 0,
-  cadeaux: 0,
+  cadeaux: 100,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -169,6 +169,13 @@ window.startGame = () => {
   document.getElementById("achievements").style.display = "block";
 
   let tick = setInterval(() => {
+    if (isWorkHour() && game.lutins > 0) {
+      document.getElementById("gameCanvas").style.backgroundImage =
+        "url('./assets/background-people.png')";
+    } else {
+      document.getElementById("gameCanvas").style.backgroundImage =
+        "url('./assets/test-background.png')";
+    }
     if (game.gameStarted && isWorkHour()) {
       game.cadeaux += game.lutins;
     }
