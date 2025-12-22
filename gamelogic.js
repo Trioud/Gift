@@ -4,7 +4,7 @@ import { toggleConvoyer } from "./conveyor.js";
 
 export let game = {
   argent: 0,
-  cadeaux: 0,
+  cadeaux: 5000,
   enfants: 0,
   lutins: 0,
   feteRH: 0,
@@ -130,7 +130,7 @@ function updateStat(id, value, prefix = "", unit = "") {
   }
 }
 
-function updateUI() {
+export function updateUI() {
   updateStat("argent", game.argent);
   updateStat("cadeaux", game.cadeaux);
   updateStat("enfants", game.enfants);
