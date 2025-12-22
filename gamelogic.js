@@ -14,7 +14,7 @@ const endTime = new Date(2025, 11, 25, 0, 0, 0);
 
 export let game = {
   argent: 0,
-  cadeaux: 100,
+  cadeaux: 1000000,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -31,6 +31,7 @@ export let game = {
   gameStarted: false,
   marketingTier: 0,
   gameEnded: false,
+  sabotageCoins: 100,
   achievement: [
     {
       label: "100 lettres d'enfants",
@@ -140,12 +141,36 @@ export let game = {
         limit: 1,
         reduction: 0.5,
       },
+    },
+    sabotage: {
       sabotageCoin: {
         label: "Gagne un Sabotage Coin",
-        price: 10000,
+        price: -1,
         current: 0,
-        limit: 1,
+        limit: -1,
         reduction: 0.5,
+      },
+      charbon: {
+        label:
+          "Remplacer avec du charbon les cadeaux du Père Noël (Multiplicateur de 10)",
+        price: 1,
+        current: 0,
+        limit: -1,
+        reduction: 1.25,
+      },
+      corruption: {
+        label: "Corrompre les lutins du père Noël",
+        price: 1,
+        current: 0,
+        limit: -1,
+        reduction: 1.25,
+      },
+      casserole: {
+        label: "Trouver les casseroles sur Madame Noël",
+        price: 1,
+        current: 0,
+        limit: -1,
+        reduction: 1.25,
       },
     },
   },
@@ -153,6 +178,7 @@ export let game = {
 
 import { availability } from "./availability.js";
 import { checkAchievements, updateAchievementsUI } from "./achievements.js";
+import { updateLettresPhysics } from "./lettre.js";
 
 function isWorkHour() {
   if (game.fullTime) return true;
@@ -346,6 +372,14 @@ export function updateUI() {
     "elfSchedule_stats",
     `${game.upgrades.rh.elfSchedule.current} / ${game.upgrades.rh.elfSchedule.limit} max`
   );
+  console.log(game.sabotageCoins);
+  updateStat("sabotageCoins_stats", `${game.sabotageCoins}`);
+  updateStat("charbon_stats", `${game.upgrades.sabotage.charbon.current}`);
+  updateStat(
+    "corruption_stats",
+    `${game.upgrades.sabotage.corruption.current}`
+  );
+  updateStat("casserole_stats", `${game.upgrades.sabotage.casserole.current}`);
 
   const time = document.getElementById("horloge");
   const timeParent = time?.parentElement;
@@ -385,8 +419,5 @@ export function updateUI() {
   updateAchievementsUI();
   updateLettresPhysics();
 }
-
-// Import de la fonction pour mettre à jour la physique des lettres
-import { updateLettresPhysics } from "./lettre.js";
 
 updateUI();

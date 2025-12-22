@@ -154,7 +154,6 @@
         <button onclick="marketingUpgrade()">Amélioration du service marketing</button><span id="marketingUpgrade_stats">0</span><br>
         <button onclick="elfSchedule()">Augmenter les horaires de travail des lutins</button><span id="elfSchedule_stats">0</span><br>
         <button onclick="nightClub()">Construction d'une discothèque pour RH (INTERDIT AUX LUTINS)</button><span id="nightClub_stats">0</span><br>
-        <button onclick="sabotageCoin()">Acheter un sabotage coin</button><span id="sabotageCoin_stats">0</span><br>
       </div>
     </div>
 
@@ -183,7 +182,10 @@
     >
       <div class="title-bar"><div class="title-bar-text">Sabotage</div></div>
       <div class="window-body">
-        <button onclick="utiliserSabotage()">Générer un Sabotage Coin</button>
+        <button onclick="sabotageCoin()">Gagne un sabotage coin</button><span id="sabotageCoins_stats">0</span><br>
+        <button onclick="charbon()">Remplacer avec du charbon les cadeaux du Père Noël</button><span id="charbon_stats">0</span><br>
+        <button onclick="corruption()">Corrompre les lutins du père Noël</button><span id="corruption_stats">0</span><br>
+        <button onclick="casserole()">Trouver les casseroles sur Madame Noël</button><span id="casserole_stats">0</span><br>
       </div>
     </div>
 
@@ -192,5 +194,6 @@
     <script type="module" src="./RH.js"></script>
     <script type="module" src="./canvas.js"></script>
     <script type="module" src="./lettre.js"></script>
+    <script type="module" src="./sabotage.js"></script>
   </body>
 </html>
