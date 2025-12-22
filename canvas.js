@@ -85,9 +85,46 @@ window.toggleWindow = (event, windowElement) => {
   const toggleBtn = windowElement.querySelector(".window-toggle");
   if (windowBody && toggleBtn) {
     const isHidden = windowBody.style.display === "none";
-    windowBody.style.display = isHidden ? "block" : "none";
-    toggleBtn.textContent = isHidden ? "−" : "+";
+
+    // Si on va minimiser, sauvegarder la largeur actuelle
+    if (!isHidden) {
+      if (!windowElement.dataset.originalWidth) {
+        windowElement.dataset.originalWidth = windowElement.offsetWidth + "px";
+      }
+      // Marquer comme minimisé manuellement
+      windowElement.dataset.manuallyMinimized = "true";
+      // Appliquer la largeur sauvegardée avant de cacher
+      windowElement.style.width = windowElement.dataset.originalWidth;
+      windowElement.classList.add("window-minimized");
+      windowBody.style.display = "none";
+      toggleBtn.textContent = "+";
+    } else {
+      // Retirer le marqueur de minimisation manuelle
+      windowElement.dataset.manuallyMinimized = "false";
+      // Restaurer la largeur quand on maximise
+      windowElement.classList.remove("window-minimized");
+      if (windowElement.dataset.originalWidth) {
+        windowElement.style.width = windowElement.dataset.originalWidth;
+      }
+      windowBody.style.display = "block";
+      toggleBtn.textContent = "−";
+    }
   }
+};
+
+// Fonction pour préserver l'état minimisé des fenêtres
+window.preserveMinimizedState = function () {
+  document.querySelectorAll(".window.box").forEach((windowEl) => {
+    if (windowEl.dataset.manuallyMinimized === "true") {
+      const windowBody = windowEl.querySelector(".window-body");
+      const toggleBtn = windowEl.querySelector(".window-toggle");
+      if (windowBody && toggleBtn) {
+        // Forcer le window-body à rester caché
+        windowBody.style.display = "none";
+        toggleBtn.textContent = "+";
+      }
+    }
+  });
 };
 
 // Fonction pour initialiser les boutons de toggle
