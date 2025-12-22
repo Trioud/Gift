@@ -1,8 +1,9 @@
-// availability.js
 import { game } from "./gamelogic.js";
-import { upgrades, remainingPurchases } from "./marketing.js";
 
 export function availability() {
+  const marketingUpgrades = game.upgrades.marketing;
+  const RHUpgrades = game.upgrades.rh;
+
   // Fête des RH
   const rhBtn = document.querySelector('button[onclick="feteRH()"]');
   if (rhBtn) {
@@ -37,13 +38,26 @@ export function availability() {
   }
 
   // Marketing Upgrades
-  for (const key in upgrades) {
+  for (const key in marketingUpgrades) {
+    const btn = document.querySelector(`button[onclick="${key}()"]`);
+    console.log(btn);
+    if (!btn) continue;
+
+    const upgrade = marketingUpgrades[key];
+    const current = upgrade.current;
+    const blocked = upgrade.limit <= current || game.argent < upgrade.price;
+    btn.classList.toggle("disabled", blocked);
+    btn.disabled = blocked;
+  }
+
+  // RH Upgrades
+  for (const key in RHUpgrades) {
     const btn = document.querySelector(`button[onclick="${key}()"]`);
     if (!btn) continue;
 
-    const upgrade = upgrades[key];
-    const remaining = remainingPurchases[key];
-    const blocked = remaining <= 0 || game.argent < upgrade.price;
+    const upgrade = RHUpgrades[key];
+    const current = upgrade.current;
+    const blocked = upgrade.limit <= current || game.argent < upgrade.price;
 
     btn.classList.toggle("disabled", blocked);
     btn.disabled = blocked;

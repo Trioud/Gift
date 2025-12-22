@@ -1,17 +1,10 @@
 import { game, updateUI } from "./gamelogic.js";
-import { upgrades as marketingUpgrades } from "./marketing.js";
 
-const upgrades = {
-  elfEfficiency: { price: 1, limit: 1 },
-  marketingEfficiency: { price: 1, limit: 1 },
-  marketingUpgrade: { price: 1, limit: 3 },
-  elfSchedule: { price: 1, limit: 5 },
-  nightClub: { price: 1, limit: 1 },
-  sabotageCoin: { price: 5, limit: -1 },
-};
+const marketingUpgrades = game.upgrades.marketing;
+const RHUpgrades = game.upgrades.marketing;
 
 function buyUpgrade(key, effectFn) {
-  const upgrade = upgrades[key];
+  const upgrade = RHUpgrades[key];
 
   if (upgrade.limit === 0) return;
   if (game.cdf < upgrade.price) return;

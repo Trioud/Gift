@@ -1,13 +1,12 @@
 // gamelogic.js
 import { format, addHours } from "https://cdn.skypack.dev/date-fns@2.30.0";
 import { toggleConvoyer } from "./conveyor.js";
-import { availability } from "./availability.js";
 
 export const numberFormatter = new Intl.NumberFormat("fr-FR");
 
 export let game = {
   argent: 0,
-  cadeaux: 0,
+  cadeaux: 10000,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -22,13 +21,98 @@ export let game = {
   conveyorActive: false,
   gameTime: new Date(2025, 0, 1, 9, 0, 0),
   gameStarted: false,
+  marketingTier: 0,
+  upgrades: {
+    marketing: {
+      mascotte: {
+        label: "Faire designer une mascotte",
+        price: 10000,
+        current: 0,
+        limit: 1,
+        reduction: 0.5,
+      },
+      instagroom: {
+        label: "Post Instagroom",
+        price: 45000,
+        current: 0,
+        limit: 5,
+        reduction: 0.1,
+      },
+      AIadd: {
+        label: "Faire une publicité avec de l'IA",
+        price: 80000,
+        current: 0,
+        limit: 1,
+        reduction: 0.5,
+      },
+      skeletonsCloset: {
+        label: "Trouver des éléments compromettants du Père Noël",
+        price: 150000,
+        current: 0,
+        limit: 5,
+        reduction: 0.2,
+      },
+      bribe: {
+        label: "Pot-de-vin à l'Éducation National",
+        price: 1000000000,
+        current: 0,
+        limit: 1,
+        reduction: 0.5,
+      },
+    },
+    rh: {
+      elfEfficiency: {
+        label: "Motiver les elfes 🗣️",
+        price: 10000,
+        current: 0,
+        limit: 1,
+        reduction: 0.5,
+      },
+      marketingEfficiency: {
+        label: "Partenariat avec Notendo",
+        price: 10000,
+        current: 0,
+        limit: 1,
+        reduction: 0.5,
+      },
+      marketingUpgrade: {
+        label: "Motiver le service Marketing 🗣️",
+        price: 10000,
+        current: 0,
+        limit: 1,
+        reduction: 0.5,
+      },
+      elfSchedule: {
+        label: "Améliorer & Augmenter la vie de travail des elfes",
+        price: 10000,
+        current: 0,
+        limit: 1,
+        reduction: 0.5,
+      },
+      nightClub: {
+        label: "Faire un nightclub pour les RH",
+        price: 10000,
+        current: 0,
+        limit: 1,
+        reduction: 0.5,
+      },
+      sabotageCoin: {
+        label: "Gagne un Sabotage Coin",
+        price: 10000,
+        current: 0,
+        limit: 1,
+        reduction: 0.5,
+      },
+    },
+  },
 };
+
+import { availability } from "./availability.js";
 
 function isWorkHour() {
   if (game.fullTime) return true;
 
   const hour = game.gameTime.getHours();
-  console.log(hour);
   return hour >= game.workStartHour && hour < game.workEndHour;
 }
 
