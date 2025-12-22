@@ -7,6 +7,9 @@ export let game = {
   cadeaux: 5000000000,
   enfants: 0,
   lutins: 0,
+  workStartHour: 6,
+  workEndHour: 18,
+  fullTime: false,
   feteRH: 0,
   sabotages: 0,
   giftsPerChild: 5,
@@ -18,14 +21,24 @@ export let game = {
   gameStarted: false,
 };
 
+function isWorkHour() {
+  if (game.fullTime) return true;
+
+  const hour = game.gameTime.getHours();
+  console.log(hour);
+  return hour >= game.workStartHour && hour < game.workEndHour;
+}
+
 window.startGame = () => {
   game.gameStarted = true;
   document.getElementById("station").style.display = "block";
   document.getElementById("missionScreen").style.display = "none";
   setInterval(() => {
-    game.cadeaux += game.lutins;
-    game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
-    game.argent += game.enfants * game.eurosPerChild;
+    if (game.gameStarted && isWorkHour()) {
+      game.cadeaux += game.lutins;
+      game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
+      game.argent += game.enfants * game.eurosPerChild;
+    }
     game.gameTime = addHours(game.gameTime, 1);
     updateUI();
   }, 2000);
@@ -141,7 +154,7 @@ export function updateUI() {
   const time = document.getElementById("horloge");
   const timeParent = time?.parentElement;
   if (time && timeParent) {
-    time.textContent = format(game.gameTime, "MMM d, HH:mm");
+    time.textContent = format(game.gameTime, "MMMM dd, HH:mm");
     timeParent.style.display = "block";
   }
 
