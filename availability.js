@@ -40,7 +40,6 @@ export function availability() {
   // Marketing Upgrades
   for (const key in marketingUpgrades) {
     const btn = document.querySelector(`button[onclick="${key}()"]`);
-    console.log(btn);
     if (!btn) continue;
 
     const upgrade = marketingUpgrades[key];

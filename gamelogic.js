@@ -118,8 +118,9 @@ function isWorkHour() {
 
 window.startGame = () => {
   game.gameStarted = true;
-  document.getElementById("station").style.display = "block";
   document.getElementById("missionScreen").style.display = "none";
+  document.getElementById("station").style.display = "block";
+  document.getElementById("child").style.display = "block";
   setInterval(() => {
     if (game.gameStarted && isWorkHour()) {
       game.cadeaux += game.lutins;
@@ -130,11 +131,6 @@ window.startGame = () => {
     updateUI();
   }, 1000);
 };
-
-if (!game.gameStarted) {
-  const el = document.getElementById("station");
-  el.style.display = "none";
-}
 
 window.conveyorbelt = () => {
   if (game.enfants >= 100 && game.argent >= 5000 && !game.conveyorActive) {
