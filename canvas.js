@@ -1,5 +1,3 @@
-import { game } from "./gamelogic.js";
-
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 resizeCanvas();
@@ -24,8 +22,7 @@ function updateModulePositions() {
 }
 
 function clearCanvas() {
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function gameLoop() {

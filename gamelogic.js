@@ -128,7 +128,7 @@ window.startGame = () => {
     game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
     game.argent += game.enfants * game.eurosPerChild;
     updateUI();
-  }, 2000);
+  }, 1000);
 };
 
 if (!game.gameStarted) {
@@ -236,12 +236,28 @@ export function updateUI() {
   updateStat("cdf", game.cdf);
   updateStat("lutins_stats", (game.lutins * game.elfEfficiency) / 2);
   updateStat("argent_stats", (game.enfants * game.eurosPerChild) / 2);
-  updateStat("mascotte_stats",  `${game.upgrades.marketing.mascotte.current} / ${game.upgrades.marketing.mascotte.limit} max`);
-  updateStat("instagroom_stats",  `${game.upgrades.marketing.instagroom.current} / ${game.upgrades.marketing.instagroom.limit} max`);
-  updateStat("AIadd_stats",  `${game.upgrades.marketing.AIadd.current} / ${game.upgrades.marketing.AIadd.limit} max`);
-  updateStat("skeletonsCloset_stats",  `${game.upgrades.marketing.skeletonsCloset.current} / ${game.upgrades.marketing.skeletonsCloset.limit} max`);
-  updateStat("bribe_stats",  `${game.upgrades.marketing.bribe.current} / ${game.upgrades.marketing.bribe.limit} max`);
 
+  updateStat("lettres", game.enfants);
+  updateStat(
+    "mascotte_stats",
+    `${game.upgrades.marketing.mascotte.current} / ${game.upgrades.marketing.mascotte.limit} max`
+  );
+  updateStat(
+    "instagroom_stats",
+    `${game.upgrades.marketing.instagroom.current} / ${game.upgrades.marketing.instagroom.limit} max`
+  );
+  updateStat(
+    "AIadd_stats",
+    `${game.upgrades.marketing.AIadd.current} / ${game.upgrades.marketing.AIadd.limit} max`
+  );
+  updateStat(
+    "skeletonsCloset_stats",
+    `${game.upgrades.marketing.skeletonsCloset.current} / ${game.upgrades.marketing.skeletonsCloset.limit} max`
+  );
+  updateStat(
+    "bribe_stats",
+    `${game.upgrades.marketing.bribe.current} / ${game.upgrades.marketing.bribe.limit} max`
+  );
 
   const time = document.getElementById("horloge");
   const timeParent = time?.parentElement;
