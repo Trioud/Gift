@@ -44,7 +44,7 @@
         Lutins : <span id="lutins">0</span>
       </p>
       <p style="display: none" data-threshold="1">
-        Coup de Force <span id="cdf">1</span>
+        FêtesRH <span id="rh">1</span>
       </p>
       <p style="display: none" data-threshold="1">
         Sabotage Coins : <span id="sabotage">0</span>
@@ -99,7 +99,8 @@
         <div class="title-bar-text">Département RH</div>
       </div>
       <div class="window-body">
-        <button onclick="feteRH()">Fête des RH</button>
+        <button onclick="feteRH()">Fête des RH</button><br>
+        <button onclick="augmenterTempsDeTravail()">Augmenter les horaires de travail des lutins</button>
       </div>
     </div>
 
@@ -118,6 +119,7 @@
 
     <script type="module" src="./gamelogic.js"></script>
     <script type="module" src="./marketing.js"></script>
+    <script type="module" src="./RH.js"></script>
     <script type="module" src="./canvas.js"></script>
   </body>
 </html>

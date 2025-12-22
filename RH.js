@@ -1,13 +1,15 @@
-import { format, addHours } from "https://cdn.skypack.dev/date-fns@2.30.0";
-import { toggleConvoyer } from "./conveyor.js";
+import { game, updateUI } from "./gamelogic.js";
 
-window.conveyerbelt = () => {
-  if (game.enfants >= 100 && game.argent >= 5000 && !game.conveyorActive) {
-    game.argent -= 5000;
-    game.elfEfficiency += 0.2;
-    game.conveyorActive = true;
-    conveyorButton.textContent = "Conveyor Activated 🏗️";
-    updateUI();
+window.augmenterTempsDeTravail = () => {
+  if (game.cdf >= 1) {
+    if (game.workStartHour > 0) game.workStartHour--;
+
+    if (game.workEndHour < 24) game.workEndHour++;
+
+    if (game.workStartHour === 0 && game.workEndHour === 24) {
+      game.fullTime = true;
+    }
   }
+
   updateUI();
 };
