@@ -3,12 +3,12 @@ import { format, addHours } from "https://cdn.skypack.dev/date-fns@2.30.0";
 import { toggleConvoyer } from "./conveyor.js";
 import { availability } from "./availability.js";
 
-const numberFormatter = new Intl.NumberFormat("fr-FR");
+export const numberFormatter = new Intl.NumberFormat("fr-FR");
 
 export let game = {
   argent: 0,
   cadeaux: 0,
-  enfants: 1000,
+  enfants: 0,
   lutins: 0,
   workStartHour: 6,
   workEndHour: 18,
@@ -60,7 +60,7 @@ window.conveyorbelt = () => {
     );
     game.conveyorActive = true;
     game.elfEfficiency += 0.2;
-    conveyorBtn.textContent = "Conveyor Activated 🏗️";
+    conveyorBtn.textContent = "Tapis Roulant opérationnel 🏗️";
     updateUI();
   }
   updateUI();
@@ -94,16 +94,6 @@ window.utiliserSabotage = () => {
   if (game.cdf >= 5) {
     game.sabotages += 1;
     game.cdf -= 5;
-    updateUI();
-  }
-};
-
-window.instagroom = () => {
-  const prix = 5000;
-  if (game.argent >= prix) {
-    game.argent -= prix;
-
-    game.giftsPerChild = Math.max(1, game.giftsPerChild - 0.05);
     updateUI();
   }
 };
