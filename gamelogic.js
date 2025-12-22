@@ -167,6 +167,15 @@ export function updateUI() {
 
   toggleModules();
   toggleSubModules();
+
+  const horaires = document.getElementById("horairesLutins");
+  if (horaires) {
+    if (game.fullTime) {
+      horaires.textContent = "Les lutins travaillent 24h/24 (temps plein)";
+    } else {
+      horaires.textContent = `Les lutins travaillent de ${game.workStartHour}h00 à ${game.workEndHour}h00`;
+    }
+  }
 }
 
 updateUI();
