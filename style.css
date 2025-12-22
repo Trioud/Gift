@@ -125,7 +125,9 @@ button:hover {
 }
 
 .mission-content {
-  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
   padding: 40px;
   background: #222;
   border: 2px solid white;

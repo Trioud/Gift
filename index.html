@@ -21,14 +21,45 @@
           Ils vous ont sélectionné pour créer un projet HUB afin de le remplacer
           définitivement.
         </p>
-        <p>
+
           <strong
             >Utilisez cet outil de planning pour pouvoir vous assurez que les
             enfants sont plus intéressés par votre projet de livraison que le
             projet du Père Noël</strong
           >
-        </p>
+          <h2>DEADLINE 25 décembre à 00:00</h2>
         <button onclick="startGame()">Commencer le projet HUB</button>
+      </div>
+    </div>
+    <div id="endScreenW" style="display: none" class="fullscreen-overlay">
+      <div class="mission-content">
+        <h1>🎉 PROJET HUB TERMINÉ 🎁</h1>
+        <img
+          src="./assets/santa.png"
+          alt="Le Père Noël travaillant à un petit boulot"
+          style="max-width: 100%; max-height: 300px; margin: 20px auto; display: block; border-radius: 10px; object-fit: contain;"
+        />
+        <p>
+          Le Père Noël, après avoir reçu très peu de lettres, est parti travailler autre part...
+        </p>
+        <p>
+          Grâce à votre efficacité, le Projet HUB a totalement remplacé le système de livraison traditionnel.
+        </p>
+        <h2>🎓 Grade final : <strong>A</strong></h2>
+        <button onclick="location.reload()">Rejouer</button>
+      </div>
+    </div>
+    <div id="endScreenL" style="display: none" class="fullscreen-overlay">
+      <div class="mission-content">
+        <h1>❌ PROJET HUB : ÉCHEC ❌</h1>
+        <p>
+          Malgré tous vos efforts, les enfants ont continué à envoyer leurs lettres au Père Noël.
+        </p>
+        <p>
+          Le Projet HUB n'a pas réussi à convaincre le monde... Le Père Noël reprend sa place de leader.
+        </p>
+        <h2>🎓 Grade final : <strong>E</strong></h2>
+        <button onclick="location.reload()">Rejouer</button>
       </div>
     </div>
     <div id="ui">
@@ -131,6 +162,8 @@
       data-threshold="0"
       data-world-x="500"
       data-world-y="500"
+      id="achievements"
+      style="display: none"
     >
       <div class="title-bar">
         <div class="title-bar-text">Achievements</div>
