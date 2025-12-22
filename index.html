@@ -64,25 +64,25 @@
     </div>
     <div id="ui">
       <p style="display: none" data-threshold="0">
-        Argent : <span id="argent">0</span>
+        Argent :<span id="argent">0</span>
       </p>
       <p style="display: none" data-threshold="0">
-        Argent : <span id="argent_stats">0</span> € /s
+        Argent :<span id="argent_stats">0</span> € /s
       </p>
       <p style="display: none" data-threshold="0">
-        Cadeaux : <span id="cadeaux">0</span>
+        Cadeaux :<span id="cadeaux">0</span>
       </p>
       <p style="display: none" data-threshold="0">
-        Enfants : <span id="enfants">0</span>
+        Enfants :<span id="enfants">0</span>
       </p>
       <p style="display: none" data-threshold="1">
-        Lutins : <span id="lutins">0</span>
+        Lutins :<span id="lutins">0</span>
       </p>
       <p style="display: none" data-threshold="1">
-        Coup de Force <span id="cdf">1</span>
+        Coup de Force<span id="cdf">1</span>
       </p>
       <p style="display: none" data-threshold="1">
-        Sabotage Coins : <span id="sabotage">0</span>
+        Sabotage Coins :<span id="sabotage">0</span>
       </p>
       <p style="display: none"><span id="horloge">--</span></p>
     </div>
@@ -90,17 +90,18 @@
       <div class="title-bar">
         <div class="title-bar-text">Lettre des enfants</div>
         <p style="display: none" data-threshold="0">
-          <span id="lettres">0</span>
+         <span id="lettres">0</span>
         </p>
+        <button onclick="ejectLetters()" style="margin-left: 8px; padding: 2px 8px; font-size: 12px; cursor: pointer;" title="Éjecter les lettres">🗑️</button>
       </div>
-      <div class="window-body">
+      <div class="window-body" id="lettres-container" style="position: relative; overflow: hidden; min-height: 300px; height: 300px;">
       </div>
     </div>
     <div class="window box" id="station" style="display: none" data-world-x="380" data-world-y="50">
       <div class="title-bar">
         <div class="title-bar-text">Station d'emballage</div>
         <p data-threshold="0">
-          Argent : <span id="lutins_stats">0</span> 🎁 /s
+          Argent :<span id="lutins_stats">0</span> 🎁 /s
         </p>
       </div>
       <div class="window-body">
@@ -128,11 +129,11 @@
     >
       <div class="title-bar"><div class="title-bar-text">Marketing</div></div>
       <div class="window-body">
-        <button onclick="mascotte()">Acheter une mascotte</button> <span id="mascotte_stats">0</span><br>
-        <button onclick="instagroom()">Post Instagroom</button> <span id="instagroom_stats">0</span><br />
-        <button onclick="AIadd()">Pub avec de l'IA</button> <span id="AIadd_stats">0</span><br>
-        <button onclick="skeletonsCloset()">Casseroles sur le Père Noël</button> <span id="skeletonsCloset_stats">0</span><br>
-        <button onclick="bribe()">Pot de vin à l'éducation nationale</button> <span id="bribe_stats">0</span><br></br>
+        <button onclick="mascotte()">Acheter une mascotte</button><span id="mascotte_stats">0</span><br>
+        <button onclick="instagroom()">Post Instagroom</button><span id="instagroom_stats">0</span><br />
+        <button onclick="AIadd()">Pub avec de l'IA</button><span id="AIadd_stats">0</span><br>
+        <button onclick="skeletonsCloset()">Casseroles sur le Père Noël</button><span id="skeletonsCloset_stats">0</span><br>
+        <button onclick="bribe()">Pot de vin à l'éducation nationale</button><span id="bribe_stats">0</span><br></br>
       </div>
     </div>
 
@@ -147,13 +148,13 @@
         <div class="title-bar-text">Département RH</div>
       </div>
       <div class="window-body">
-        <button onclick="feteRH()">Fête des RH</button><br>
-        <button onclick="elfEfficiency()">Meilleur rendement lutins</button><br>
-        <button onclick="marketingEfficiency()">Meilleur rendement du service marketing</button><br>
-        <button onclick="marketingUpgrade()">Amélioration du service marketing</button><br>
-        <button onclick="elfSchedule()">Augmenter les horaires de travail des lutins</button><br>
-        <button onclick="nightClub()">Construction d'une discothèque pour RH (INTERDIT AUX LUTINS)</button><br>
-        <button onclick="sabotageCoin()">Acheter un sabotage coin</button>
+        <button onclick="feteRH()">Fête des RH</button><span id="FeteRH_stats">0</span><br>
+        <button onclick="elfEfficiency()">Meilleur rendement lutins</button><span id="elfEfficiency_stats">0</span><br>
+        <button onclick="marketingEfficiency()">Meilleur rendement du service marketing</button><span id="marketingEfficiency_stats">0</span><br>
+        <button onclick="marketingUpgrade()">Amélioration du service marketing</button><span id="marketingUpgrade_stats">0</span><br>
+        <button onclick="elfSchedule()">Augmenter les horaires de travail des lutins</button><span id="elfSchedule_stats">0</span><br>
+        <button onclick="nightClub()">Construction d'une discothèque pour RH (INTERDIT AUX LUTINS)</button><span id="nightClub_stats">0</span><br>
+        <button onclick="sabotageCoin()">Acheter un sabotage coin</button><span id="sabotageCoin_stats">0</span><br>
       </div>
     </div>
 
@@ -190,5 +191,6 @@
     <script type="module" src="./marketing.js"></script>
     <script type="module" src="./RH.js"></script>
     <script type="module" src="./canvas.js"></script>
+    <script type="module" src="./lettre.js"></script>
   </body>
 </html>

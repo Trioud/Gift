@@ -5,19 +5,28 @@ import { game } from "./gamelogic.js";
 let activeToasts = [];
 
 function showToast(title, message) {
-  const toastHeight = 100;
   const bottomOffset = 20;
-  const spacing = 10;
+  const spacing = 15; // Espacement fixe entre les toasts
   const index = activeToasts.length;
 
   // Créer le toast
   const toast = document.createElement("div");
   toast.className = "achievement-popup";
-  toast.style.bottom = `${bottomOffset + index * (toastHeight + spacing)}px`;
   toast.innerHTML = `<h3>🎉 ${title}</h3><p>${message}</p>`;
 
   activeToasts.push(toast);
   document.body.appendChild(toast);
+
+  // Calculer la position en fonction de la hauteur réelle des toasts précédents
+  let totalHeight = bottomOffset;
+  for (let i = 0; i < activeToasts.length - 1; i++) {
+    const prevToast = activeToasts[i];
+    if (prevToast.parentNode) {
+      const prevHeight = prevToast.offsetHeight;
+      totalHeight += prevHeight + spacing;
+    }
+  }
+  toast.style.bottom = `${totalHeight}px`;
 
   // Confettis
   setTimeout(() => {
@@ -49,9 +58,13 @@ function showToast(title, message) {
         if (toast.parentNode) {
           activeToasts = activeToasts.filter((t) => t !== toast);
           document.body.removeChild(toast);
-          // Réorganiser les toasts restants
-          activeToasts.forEach((t, i) => {
-            t.style.bottom = `${bottomOffset + i * (toastHeight + spacing)}px`;
+          // Réorganiser les toasts restants avec espacement uniforme
+          let currentBottom = bottomOffset;
+          activeToasts.forEach((t) => {
+            if (t.parentNode) {
+              t.style.bottom = `${currentBottom}px`;
+              currentBottom += t.offsetHeight + spacing;
+            }
           });
         }
       }, 300);

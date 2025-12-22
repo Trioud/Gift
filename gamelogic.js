@@ -14,7 +14,11 @@ const endTime = new Date(2025, 11, 25, 0, 0, 0);
 
 export let game = {
   argent: 0,
+<<<<<<< HEAD
   cadeaux: 100,
+=======
+  cadeaux: 1000,
+>>>>>>> 3208ab0 (feat: update game logic and UI for marketing and RH upgrades, improve display handling)
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -109,28 +113,28 @@ export let game = {
         label: "Motiver les elfes 🗣️",
         price: 10000,
         current: 0,
-        limit: 1,
+        limit: 12,
         reduction: 0.5,
       },
       marketingEfficiency: {
         label: "Partenariat avec Notendo",
         price: 10000,
         current: 0,
-        limit: 1,
+        limit: 11,
         reduction: 0.5,
       },
       marketingUpgrade: {
         label: "Motiver le service Marketing 🗣️",
         price: 10000,
         current: 0,
-        limit: 1,
+        limit: 10,
         reduction: 0.5,
       },
       elfSchedule: {
         label: "Améliorer & Augmenter la vie de travail des elfes",
         price: 10000,
         current: 0,
-        limit: 1,
+        limit: 6,
         reduction: 0.5,
       },
       nightClub: {
@@ -247,18 +251,28 @@ function toggleModules() {
   document
     .querySelector('[data-threshold="100"]')
     ?.style.setProperty("display", child >= 100 ? "block" : "none");
-  document
-    .querySelectorAll('[data-threshold="1000"]')
-    .forEach((el) => (el.style.display = child >= 1000 ? "block" : "none"));
-  document
-    .querySelectorAll('[data-threshold="10000"]')
-    .forEach((el) => (el.style.display = child >= 10000 ? "block" : "none"));
-  document
-    .querySelectorAll('[data-threshold="100000"]')
-    .forEach((el) => (el.style.display = child >= 100000 ? "block" : "none"));
-  document
-    .querySelectorAll('[data-threshold="1000000"]')
-    .forEach((el) => (el.style.display = child >= 1000000 ? "block" : "none"));
+
+  // Ne pas toucher au display des fenêtres si elles sont minimisées manuellement
+  document.querySelectorAll('[data-threshold="1000"]').forEach((el) => {
+    if (el.dataset.manuallyMinimized !== "true") {
+      el.style.display = child >= 1000 ? "block" : "none";
+    }
+  });
+  document.querySelectorAll('[data-threshold="10000"]').forEach((el) => {
+    if (el.dataset.manuallyMinimized !== "true") {
+      el.style.display = child >= 10000 ? "block" : "none";
+    }
+  });
+  document.querySelectorAll('[data-threshold="100000"]').forEach((el) => {
+    if (el.dataset.manuallyMinimized !== "true") {
+      el.style.display = child >= 100000 ? "block" : "none";
+    }
+  });
+  document.querySelectorAll('[data-threshold="1000000"]').forEach((el) => {
+    if (el.dataset.manuallyMinimized !== "true") {
+      el.style.display = child >= 1000000 ? "block" : "none";
+    }
+  });
 }
 
 function toggleSubModules() {
@@ -319,6 +333,24 @@ export function updateUI() {
     `${game.upgrades.marketing.bribe.current} / ${game.upgrades.marketing.bribe.limit} max`
   );
 
+  updateStat("FeteRH_stats", `${game.cdf}`);
+  updateStat(
+    "elfEfficiency_stats",
+    `${game.upgrades.rh.elfEfficiency.current} / ${game.upgrades.rh.elfEfficiency.limit} max`
+  );
+  updateStat(
+    "marketingEfficiency_stats",
+    `${game.upgrades.rh.marketingEfficiency.current} / ${game.upgrades.rh.marketingEfficiency.limit} max`
+  );
+  updateStat(
+    "marketingUpgrade_stats",
+    `${game.upgrades.rh.marketingUpgrade.current} / ${game.upgrades.rh.marketingUpgrade.limit} max`
+  );
+  updateStat(
+    "elfSchedule_stats",
+    `${game.upgrades.rh.elfSchedule.current} / ${game.upgrades.rh.elfSchedule.limit} max`
+  );
+
   const time = document.getElementById("horloge");
   const timeParent = time?.parentElement;
   if (time && timeParent) {
@@ -338,6 +370,11 @@ export function updateUI() {
   toggleModules();
   toggleSubModules();
 
+  // Préserver l'état minimisé des fenêtres après les toggles
+  if (window.preserveMinimizedState) {
+    window.preserveMinimizedState();
+  }
+
   const horaires = document.getElementById("horairesLutins");
   if (horaires) {
     if (game.fullTime) {
@@ -350,6 +387,10 @@ export function updateUI() {
 
   checkAchievements();
   updateAchievementsUI();
+  updateLettresPhysics();
 }
+
+// Import de la fonction pour mettre à jour la physique des lettres
+import { updateLettresPhysics } from "./lettre.js";
 
 updateUI();
