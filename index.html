@@ -35,6 +35,9 @@
         Argent : <span id="argent">0</span>
       </p>
       <p style="display: none" data-threshold="0">
+        Argent : <span id="argent_stats">0</span> € /s
+      </p>
+      <p style="display: none" data-threshold="0">
         Cadeaux : <span id="cadeaux">0</span>
       </p>
       <p style="display: none" data-threshold="0">
@@ -54,6 +57,9 @@
     <div class="window box" id="station" data-world-x="380" data-world-y="50">
       <div class="title-bar">
         <div class="title-bar-text">Station d'emballage</div>
+        <p style="display: none" data-threshold="0">
+          Argent : <span id="lutins_stats">0</span> 🎁 /s
+        </p>
       </div>
       <div class="window-body">
         <p id="horairesLutins">Les lutins travaillent de 6h00 à 18h00</p>
@@ -64,7 +70,7 @@
         <button
           data-child-treshold="100"
           style="display: none"
-          onclick="conveyorbelt()"
+          onclick="convoyorbelt()"
         >
           Tapis Roulant</button
         ><br />
@@ -80,11 +86,11 @@
     >
       <div class="title-bar"><div class="title-bar-text">Marketing</div></div>
       <div class="window-body">
-        <button onclick="mascotte()">Acheter une mascotte</button><br>
-        <button onclick="instagroom()">Post Instagroom</button><br />
-        <button onclick="AIadd()">Pub avec de l'IA</button><br>
-        <button onclick="skeletonsCloset()">Casseroles sur le Père Noël</button><br>
-        <button onclick="bribe()">Pot de vin à l'éducation nationale</button><br></br>
+        <button onclick="mascotte()">Acheter une mascotte</button> <span id="mascotte_stats">0</span><br>
+        <button onclick="instagroom()">Post Instagroom</button> <span id="instagroom_stats">0</span><br />
+        <button onclick="AIadd()">Pub avec de l'IA</button> <span id="AIadd_stats">0</span><br>
+        <button onclick="skeletonsCloset()">Casseroles sur le Père Noël</button> <span id="skeletonsCloset_stats">0</span><br>
+        <button onclick="bribe()">Pot de vin à l'éducation nationale</button> <span id="bribe_stats">0</span><br></br>
       </div>
     </div>
 
