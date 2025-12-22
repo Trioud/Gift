@@ -74,6 +74,7 @@ export let game = {
         current: 0,
         limit: 1,
         reduction: 0.5,
+        requiredTier: 0,
       },
       instagroom: {
         label: "Post Instagroom",
@@ -81,6 +82,7 @@ export let game = {
         current: 0,
         limit: 5,
         reduction: 0.1,
+        requiredTier: 0,
       },
       AIadd: {
         label: "Faire une publicité avec de l'IA",
@@ -88,6 +90,7 @@ export let game = {
         current: 0,
         limit: 1,
         reduction: 0.5,
+        requiredTier: 1,
       },
       skeletonsCloset: {
         label: "Trouver des éléments compromettants du Père Noël",
@@ -95,6 +98,7 @@ export let game = {
         current: 0,
         limit: 5,
         reduction: 0.2,
+        requiredTier: 2,
       },
       bribe: {
         label: "Pot-de-vin à l'Éducation National",
@@ -102,47 +106,48 @@ export let game = {
         current: 0,
         limit: 1,
         reduction: 0.5,
+        requiredTier: 3,
       },
     },
     rh: {
       elfEfficiency: {
         label: "Motiver les elfes 🗣️",
-        price: 10000,
+        price: 1,
         current: 0,
-        limit: 12,
+        limit: 1,
         reduction: 0.5,
       },
       marketingEfficiency: {
         label: "Partenariat avec Notendo",
-        price: 10000,
+        price: 1,
         current: 0,
-        limit: 11,
+        limit: 1,
         reduction: 0.5,
       },
       marketingUpgrade: {
         label: "Motiver le service Marketing 🗣️",
-        price: 10000,
+        price: 1,
         current: 0,
-        limit: 10,
+        limit: 5,
         reduction: 0.5,
       },
       elfSchedule: {
         label: "Améliorer & Augmenter la vie de travail des elfes",
-        price: 10000,
+        price: 1,
         current: 0,
-        limit: 6,
+        limit: 1,
         reduction: 0.5,
       },
       nightClub: {
         label: "Faire un nightclub pour les RH",
-        price: 10000,
+        price: 1,
         current: 0,
         limit: 1,
         reduction: 0.5,
       },
       sabotageCoin: {
         label: "Gagne un Sabotage Coin",
-        price: 10000,
+        price: 1,
         current: 0,
         limit: 1,
         reduction: 0.5,
@@ -384,6 +389,10 @@ export function updateUI() {
   checkAchievements();
   updateAchievementsUI();
   updateLettresPhysics();
+
+  if (window.updateMarketingButtonsVisibility) {
+    window.updateMarketingButtonsVisibility();
+  }
 }
 
 // Import de la fonction pour mettre à jour la physique des lettres
