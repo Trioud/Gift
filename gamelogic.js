@@ -1,13 +1,14 @@
 // gamelogic.js
 import { format, addHours } from "https://cdn.skypack.dev/date-fns@2.30.0";
 import { toggleConvoyer } from "./conveyor.js";
+import { availability } from "./availability.js";
 
 const numberFormatter = new Intl.NumberFormat("fr-FR");
 
 export let game = {
   argent: 0,
-  cadeaux: 5000000000,
-  enfants: 0,
+  cadeaux: 0,
+  enfants: 1000,
   lutins: 0,
   workStartHour: 6,
   workEndHour: 18,
@@ -51,12 +52,15 @@ if (!game.gameStarted) {
   el.style.display = "none";
 }
 
-window.conveyerbelt = () => {
+window.conveyorbelt = () => {
   if (game.enfants >= 100 && game.argent >= 5000 && !game.conveyorActive) {
     game.argent -= 5000;
-    game.elfEfficiency += 0.2;
+    const conveyorBtn = document.querySelector(
+      'button[onclick="conveyorbelt()"]'
+    );
     game.conveyorActive = true;
-    conveyorButton.textContent = "Conveyor Activated 🏗️";
+    game.elfEfficiency += 0.2;
+    conveyorBtn.textContent = "Conveyor Activated 🏗️";
     updateUI();
   }
   updateUI();
@@ -184,50 +188,7 @@ export function updateUI() {
       horaires.textContent = `Les lutins travaillent de ${game.workStartHour}h00 à ${game.workEndHour}h00`;
     }
   }
-  // Instagroom
-  const instagroomBtn = document.querySelector(
-    'button[onclick="instagroom()"]'
-  );
-  if (instagroomBtn) {
-    const maxed = game.giftsPerChild <= 1;
-    const affordable = game.argent >= 5000;
-    instagroomBtn.classList.toggle("disabled", !affordable || maxed);
-    instagroomBtn.disabled = !affordable || maxed;
-  }
-
-  // Fête des RH
-  const rhBtn = document.querySelector('button[onclick="feteRH()"]');
-  if (rhBtn) {
-    rhBtn.classList.toggle("disabled", game.argent <= 0);
-    rhBtn.disabled = game.argent <= 0;
-  }
-
-  // Sabotage
-  const sabotageBtn = document.querySelector(
-    'button[onclick="utiliserSabotage()"]'
-  );
-  if (sabotageBtn) {
-    sabotageBtn.classList.toggle("disabled", game.feteRH < 5);
-    sabotageBtn.disabled = game.feteRH < 5;
-  }
-
-  // Acheter un Lutin
-  const lutinBtn = document.querySelector('button[onclick="acheterLutin()"]');
-  if (lutinBtn) {
-    lutinBtn.classList.toggle("disabled", game.argent < game.elfCost);
-    lutinBtn.disabled = game.argent < game.elfCost;
-  }
-
-  // Tapis Roulant
-  const conveyorBtn = document.querySelector(
-    'button[onclick="conveyerbelt()"]'
-  );
-  if (conveyorBtn) {
-    const blocked =
-      game.conveyorActive || game.argent < 5000 || game.enfants < 100;
-    conveyorBtn.classList.toggle("disabled", blocked);
-    conveyorBtn.disabled = blocked;
-  }
+  availability();
 }
 
 updateUI();
