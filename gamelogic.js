@@ -14,7 +14,7 @@ const endTime = new Date(2025, 11, 25, 0, 0, 0);
 
 export let game = {
   argent: 0,
-  cadeaux: 1000000,
+  cadeaux: 500000,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -75,6 +75,7 @@ export let game = {
         current: 0,
         limit: 1,
         reduction: 0.5,
+        requiredTier: 0,
       },
       instagroom: {
         label: "Post Instagroom",
@@ -82,6 +83,7 @@ export let game = {
         current: 0,
         limit: 5,
         reduction: 0.1,
+        requiredTier: 0,
       },
       AIadd: {
         label: "Faire une publicité avec de l'IA",
@@ -89,6 +91,7 @@ export let game = {
         current: 0,
         limit: 1,
         reduction: 0.5,
+        requiredTier: 1,
       },
       skeletonsCloset: {
         label: "Trouver des éléments compromettants du Père Noël",
@@ -96,6 +99,7 @@ export let game = {
         current: 0,
         limit: 5,
         reduction: 0.2,
+        requiredTier: 2,
       },
       bribe: {
         label: "Pot-de-vin à l'Éducation National",
@@ -103,40 +107,41 @@ export let game = {
         current: 0,
         limit: 1,
         reduction: 0.5,
+        requiredTier: 3,
       },
     },
     rh: {
       elfEfficiency: {
         label: "Motiver les elfes 🗣️",
-        price: 10000,
+        price: 1,
         current: 0,
-        limit: 12,
+        limit: 1,
         reduction: 0.5,
       },
       marketingEfficiency: {
         label: "Partenariat avec Notendo",
-        price: 10000,
+        price: 1,
         current: 0,
-        limit: 11,
+        limit: 1,
         reduction: 0.5,
       },
       marketingUpgrade: {
         label: "Motiver le service Marketing 🗣️",
-        price: 10000,
+        price: 1,
         current: 0,
-        limit: 10,
+        limit: 3,
         reduction: 0.5,
       },
       elfSchedule: {
         label: "Améliorer & Augmenter la vie de travail des elfes",
-        price: 10000,
+        price: 1,
         current: 0,
-        limit: 6,
+        limit: 1,
         reduction: 0.5,
       },
       nightClub: {
         label: "Faire un nightclub pour les RH",
-        price: 10000,
+        price: 1,
         current: 0,
         limit: 1,
         reduction: 0.5,
@@ -187,6 +192,29 @@ function isWorkHour() {
   return hour >= game.workStartHour && hour < game.workEndHour;
 }
 
+let currentCanvas = "";
+
+function changeCanvasBackground(newUrl) {
+  const bgDiv = document.getElementById("bgTransition");
+
+  // Prevent reapplying the same background
+  if (newUrl === currentCanvas) return;
+
+  // Start fade-in with new background
+  bgDiv.style.backgroundImage = `url('${newUrl}')`;
+  bgDiv.style.opacity = 0;
+
+  setTimeout(() => {
+    // Fade out the transition overlay
+    if (newUrl == "./assets/background-people.png") {
+      bgDiv.style.opacity = 1;
+    } else {
+      bgDiv.style.opacity = 0.4;
+    }
+    currentCanvas = newUrl;
+  }, 200); // Match the CSS transition duration
+}
+
 window.startGame = () => {
   game.gameStarted = true;
   document.getElementById("missionScreen").style.display = "none";
@@ -194,14 +222,14 @@ window.startGame = () => {
   document.getElementById("child").style.display = "block";
   document.getElementById("achievements").style.display = "block";
 
+  changeCanvasBackground("./assets/test-background.png");
+
   let tick = setInterval(() => {
-    if (isWorkHour() && game.lutins > 0) {
-      document.getElementById("gameCanvas").style.backgroundImage =
-        "url('./assets/background-people.png')";
-    } else {
-      document.getElementById("gameCanvas").style.backgroundImage =
-        "url('./assets/test-background.png')";
-    }
+    const activeBg =
+      isWorkHour() && game.lutins > 0
+        ? "./assets/background-people.png"
+        : "./assets/test-background.png";
+    changeCanvasBackground(activeBg);
     if (game.gameStarted && isWorkHour()) {
       game.cadeaux += game.lutins;
     }
@@ -392,7 +420,7 @@ export function updateUI() {
     'button[onclick="acheterLutin()"]'
   );
   if (lutinButton) {
-    lutinButton.textContent = `Embaucher un Lutin (€${numberFormatter.format(
+    lutinButton.textContent = `Embaucher un TEK1 (€${numberFormatter.format(
       game.elfCost
     )})`;
   }
@@ -418,6 +446,10 @@ export function updateUI() {
   checkAchievements();
   updateAchievementsUI();
   updateLettresPhysics();
+
+  if (window.updateMarketingButtonsVisibility) {
+    window.updateMarketingButtonsVisibility();
+  }
 }
 
 updateUI();

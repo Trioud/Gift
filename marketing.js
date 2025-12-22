@@ -2,6 +2,21 @@ import { game, updateUI } from "./gamelogic.js";
 
 const marketingUpgrades = game.upgrades.marketing;
 
+export function updateMarketingButtonsVisibility() {
+  for (const [name, upgrade] of Object.entries(marketingUpgrades)) {
+    const btn = document.querySelector(`button[onclick="${name}()"]`);
+    if (!btn) continue;
+
+    if (game.marketingTier < upgrade.requiredTier) {
+      btn.style.display = "none"; // 🔒 hidden
+      btn.disabled = true;
+    } else {
+      btn.style.display = "inline-block";
+      btn.disabled = upgrade.current >= upgrade.limit;
+    }
+  }
+}
+
 function updateButtonLabel(name) {
   const upgrade = marketingUpgrades[name];
   const btn = document.querySelector(`button[onclick="${name}()"]`);
@@ -27,6 +42,7 @@ function buyUpgrade(name) {
     game.giftsPerChild = Math.max(1, game.giftsPerChild - upgrade.reduction);
 
     updateButtonLabel(name);
+    updateMarketingButtonsVisibility();
     updateUI();
   }
 }
@@ -42,3 +58,5 @@ window.bribe = () => buyUpgrade("bribe");
 for (const name in marketingUpgrades) {
   updateButtonLabel(name);
 }
+
+window.updateMarketingButtonsVisibility = updateMarketingButtonsVisibility;

@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/party-js@2/bundle/party.min.js"></script>
   </head>
   <body>
+    <div id="bgTransition"></div>
     <canvas id="gameCanvas"></canvas>
     <div id="missionScreen" class="fullscreen-overlay">
       <div class="mission-content">
@@ -63,28 +64,33 @@
       </div>
     </div>
     <div id="ui">
+      <div class="ui-title">
+        Ressources
+      </div>
+      <div class="ui">
       <p style="display: none" data-threshold="0">
-        Argent :<span id="argent">0</span>
-      </p>
-      <p style="display: none" data-threshold="0">
-        Argent :<span id="argent_stats">0</span> € /s
-      </p>
-      <p style="display: none" data-threshold="0">
-        Cadeaux :<span id="cadeaux">0</span>
-      </p>
-      <p style="display: none" data-threshold="0">
-        Enfants :<span id="enfants">0</span>
-      </p>
-      <p style="display: none" data-threshold="1">
-        Lutins :<span id="lutins">0</span>
-      </p>
-      <p style="display: none" data-threshold="1">
-        Coup de Force<span id="cdf">1</span>
-      </p>
-      <p style="display: none" data-threshold="1">
-        Sabotage Coins :<span id="sabotage">0</span>
-      </p>
-      <p style="display: none"><span id="horloge">--</span></p>
+          💰 Argent : <span id="argent">0</span>
+        </p>
+        <p style="display: none" data-threshold="0">
+          📈 Rendement : <span id="argent_stats">0</span> € /s
+        </p>
+        <p style="display: none" data-threshold="0">
+          🎁 Cadeaux : <span id="cadeaux">0</span>
+        </p>
+        <p style="display: none" data-threshold="0">
+          ✉️ Lettres d'enfants : <span id="enfants">0</span>
+        </p>
+        <p style="display: none" data-threshold="1">
+          🧝 Tek1 : <span id="lutins">0</span>
+        </p>
+        <p style="display: none" data-threshold="1">
+          💪 Coup de Force : <span id="cdf">1</span>
+        </p>
+        <p style="display: none" data-threshold="1">
+          🕵️ Espions : <span id="sabotage">0</span>
+        </p>
+        <p style="display: none"><span id="horloge">🕣--</span></p>
+      </div>
     </div>
      <div class="window box" style="display: none" id="child" data-world-x="800" data-world-y="50">
       <div class="title-bar">
@@ -101,19 +107,18 @@
       <div class="title-bar">
         <div class="title-bar-text">Station d'emballage</div>
         <p data-threshold="0">
-          Argent :<span id="lutins_stats">0</span> 🎁 /s
         </p>
       </div>
       <div class="window-body">
-        <p id="horairesLutins">Les lutins travaillent de 6h00 à 18h00</p>
+        <p style="padding: 10px 0; margin: 0" id="horairesLutins">Les lutins travaillent de 6h00 à 18h00</p>
         <button onclick="emballerManuellement()">
           Emballer un cadeau (à la main)</button
         ><br />
-        <button onclick="acheterLutin()">Embaucher un Lutin</button><br />
+        <button onclick="acheterLutin()">Embaucher un TEK1</button> <span id="lutins_stats">0</span> 🎁 /s
         <button
           data-child-treshold="100"
           style="display: none"
-          onclick="convoyorbelt()"
+          onclick="convoyerbelt()"
         >
           Tapis Roulant</button
         ><br />
@@ -131,9 +136,9 @@
       <div class="window-body">
         <button onclick="mascotte()">Acheter une mascotte</button><span id="mascotte_stats">0</span><br>
         <button onclick="instagroom()">Post Instagroom</button><span id="instagroom_stats">0</span><br />
-        <button onclick="AIadd()">Pub avec de l'IA</button><span id="AIadd_stats">0</span><br>
-        <button onclick="skeletonsCloset()">Casseroles sur le Père Noël</button><span id="skeletonsCloset_stats">0</span><br>
-        <button onclick="bribe()">Pot de vin à l'éducation nationale</button><span id="bribe_stats">0</span><br></br>
+        <button onclick="AIadd()">Pub avec de l'IA</button><span id="AIadd_stats" data-required-tier="1">0</span><br>
+        <button onclick="skeletonsCloset()">Casseroles sur le Père Noël</button><span id="skeletonsCloset_stats" data-required-tier="2">0</span><br>
+        <button onclick="bribe()">Pot de vin à l'éducation nationale</button><span id="bribe_stats" data-required-tier="3">0</span><br></br>
       </div>
     </div>
 
