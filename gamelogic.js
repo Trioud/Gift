@@ -136,7 +136,7 @@ export let game = {
         label: "Améliorer & Augmenter la vie de travail des elfes",
         price: 1,
         current: 0,
-        limit: 1,
+        limit: 6,
         reduction: 0.5,
       },
       nightClub: {
@@ -152,7 +152,7 @@ export let game = {
         label: "Gagne un Sabotage Coin",
         price: -1,
         current: 0,
-        limit: -1,
+        limit: 4,
         reduction: 0.5,
       },
       charbon: {
@@ -160,21 +160,21 @@ export let game = {
           "Remplacer avec du charbon les cadeaux du Père Noël (Multiplicateur de 10)",
         price: 1,
         current: 0,
-        limit: -1,
+        limit: 1,
         reduction: 1.25,
       },
       corruption: {
         label: "Corrompre les lutins du père Noël",
         price: 1,
         current: 0,
-        limit: -1,
+        limit: 1,
         reduction: 1.25,
       },
       casserole: {
         label: "Trouver les casseroles sur Madame Noël",
         price: 1,
         current: 0,
-        limit: -1,
+        limit: 1,
         reduction: 1.25,
       },
     },
@@ -436,9 +436,9 @@ export function updateUI() {
   const horaires = document.getElementById("horairesLutins");
   if (horaires) {
     if (game.fullTime) {
-      horaires.textContent = "Les lutins travaillent 24h/24 (temps plein)";
+      horaires.textContent = "Les TEK1 travaillent 24h/24 (temps plein)";
     } else {
-      horaires.textContent = `Les lutins travaillent de ${game.workStartHour}h00 à ${game.workEndHour}h00`;
+      horaires.textContent = `Les TEK1 travaillent de ${game.workStartHour}h00 à ${game.workEndHour}h00`;
     }
   }
   availability();

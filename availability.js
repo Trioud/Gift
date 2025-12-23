@@ -3,6 +3,7 @@ import { game } from "./gamelogic.js";
 export function availability() {
   const marketingUpgrades = game.upgrades.marketing;
   const RHUpgrades = game.upgrades.rh;
+  const sabotageUpgrades = game.upgrades.sabotage;
 
   // Fête des RH
   const rhBtn = document.querySelector('button[onclick="feteRH()"]');
@@ -55,6 +56,19 @@ export function availability() {
     if (!btn) continue;
 
     const upgrade = RHUpgrades[key];
+    const current = upgrade.current;
+    const blocked = upgrade.limit <= current || game.argent < upgrade.price;
+
+    btn.classList.toggle("disabled", blocked);
+    btn.disabled = blocked;
+  }
+
+  // Sabotages Upgrade
+  for (const key in sabotageUpgrades) {
+    const btn = document.querySelector(`button[onclick="${key}()"]`);
+    if (!btn) continue;
+
+    const upgrade = sabotageUpgrades[key];
     const current = upgrade.current;
     const blocked = upgrade.limit <= current || game.argent < upgrade.price;
 

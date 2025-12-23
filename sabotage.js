@@ -20,8 +20,8 @@ function buyUpgrade(key, effectFn) {
 
 window.sabotageCoin = () => {
   buyUpgrade("sabotageCoin", () => {
-    console.log(sabotageUpgrades.sabotageCoin);
-    game.sabotageCoins++;
+    game.sabotageCoins += 1;
+    game.upgrades.sabotage.sabotageCoin.current += 1;
   });
 };
 
