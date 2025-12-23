@@ -364,41 +364,41 @@ export function updateUI() {
   updateStat("lettres", game.enfants);
   updateStat(
     "mascotte_stats",
-    `${game.upgrades.marketing.mascotte.current} / ${game.upgrades.marketing.mascotte.limit} max`
+    `${game.upgrades.marketing.mascotte.current}/${game.upgrades.marketing.mascotte.limit}`
   );
   updateStat(
     "instagroom_stats",
-    `${game.upgrades.marketing.instagroom.current} / ${game.upgrades.marketing.instagroom.limit} max`
+    `${game.upgrades.marketing.instagroom.current}/${game.upgrades.marketing.instagroom.limit}`
   );
   updateStat(
     "AIadd_stats",
-    `${game.upgrades.marketing.AIadd.current} / ${game.upgrades.marketing.AIadd.limit} max`
+    `${game.upgrades.marketing.AIadd.current}/${game.upgrades.marketing.AIadd.limit}`
   );
   updateStat(
     "skeletonsCloset_stats",
-    `${game.upgrades.marketing.skeletonsCloset.current} / ${game.upgrades.marketing.skeletonsCloset.limit} max`
+    `${game.upgrades.marketing.skeletonsCloset.current}/${game.upgrades.marketing.skeletonsCloset.limit}`
   );
   updateStat(
     "bribe_stats",
-    `${game.upgrades.marketing.bribe.current} / ${game.upgrades.marketing.bribe.limit} max`
+    `${game.upgrades.marketing.bribe.current}/${game.upgrades.marketing.bribe.limit}`
   );
 
   updateStat("FeteRH_stats", `${game.cdf}`);
   updateStat(
     "elfEfficiency_stats",
-    `${game.upgrades.rh.elfEfficiency.current} / ${game.upgrades.rh.elfEfficiency.limit} max`
+    `${game.upgrades.rh.elfEfficiency.current}/${game.upgrades.rh.elfEfficiency.limit}`
   );
   updateStat(
     "marketingEfficiency_stats",
-    `${game.upgrades.rh.marketingEfficiency.current} / ${game.upgrades.rh.marketingEfficiency.limit} max`
+    `${game.upgrades.rh.marketingEfficiency.current}/${game.upgrades.rh.marketingEfficiency.limit}`
   );
   updateStat(
     "marketingUpgrade_stats",
-    `${game.upgrades.rh.marketingUpgrade.current} / ${game.upgrades.rh.marketingUpgrade.limit} max`
+    `${game.upgrades.rh.marketingUpgrade.current}/${game.upgrades.rh.marketingUpgrade.limit}`
   );
   updateStat(
     "elfSchedule_stats",
-    `${game.upgrades.rh.elfSchedule.current} / ${game.upgrades.rh.elfSchedule.limit} max`
+    `${game.upgrades.rh.elfSchedule.current}/${game.upgrades.rh.elfSchedule.limit}`
   );
   console.log(game.sabotageCoins);
   updateStat("sabotageCoins_stats", `${game.sabotageCoins}`);
@@ -420,9 +420,9 @@ export function updateUI() {
     'button[onclick="acheterLutin()"]'
   );
   if (lutinButton) {
-    lutinButton.textContent = `Embaucher un TEK1 (€${numberFormatter.format(
+    lutinButton.textContent = `Embaucher un TEK1 (${numberFormatter.format(
       game.elfCost
-    )})`;
+    )}€)`;
   }
 
   toggleModules();
