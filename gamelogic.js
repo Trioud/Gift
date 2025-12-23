@@ -71,7 +71,9 @@ export let game = {
   upgrades: {
     marketing: {
       mascotte: {
-        label: "Faire designer une mascotte",
+        label: `Faire designer une mascotte ${numberFormatter.format(
+          10000
+        )}€<br>Diminue le nombre de cadeaux nécessaire de 0,5 pour avoir une lettre d'enfant`,
         price: 10000,
         current: 0,
         limit: 1,
@@ -79,7 +81,9 @@ export let game = {
         requiredTier: 0,
       },
       instagroom: {
-        label: "Post Instagroom",
+        label: `Faire designer une mascotte ${numberFormatter.format(
+          45000
+        )}€<br>Diminue le nombre de cadeaux nécessaire de 0,1 pour avoir une lettre d'enfant`,
         price: 45000,
         current: 0,
         limit: 5,
@@ -87,7 +91,9 @@ export let game = {
         requiredTier: 0,
       },
       AIadd: {
-        label: "Faire une publicité avec de l'IA",
+        label: `Post Instagroom ${numberFormatter.format(
+          80000
+        )}€<br>Diminue le nombre de cadeaux nécessaire de 0,5 pour avoir une lettre d'enfant`,
         price: 80000,
         current: 0,
         limit: 1,
@@ -95,7 +101,9 @@ export let game = {
         requiredTier: 1,
       },
       skeletonsCloset: {
-        label: "Trouver des éléments compromettants du Père Noël",
+        label: `Trouver des éléments compromettants du Père Noël ${numberFormatter.format(
+          150000
+        )}€<br>Diminue le nombre de cadeaux nécessaire de 0,2 pour avoir une lettre d'enfant`,
         price: 150000,
         current: 0,
         limit: 5,
@@ -103,7 +111,9 @@ export let game = {
         requiredTier: 2,
       },
       bribe: {
-        label: "Pot-de-vin à l'Éducation National",
+        label: `Pot-de-vin à l'Éducation National ${numberFormatter.format(
+          1000000000
+        )}€<br>Diminue le nombre de cadeaux nécessaire de 0,5 pour avoir une lettre d'enfant`,
         price: 1000000000,
         current: 0,
         limit: 1,
@@ -399,6 +409,7 @@ export function updateUI() {
   updateStat("argent", game.argent);
   updateStat("cadeaux", game.cadeaux);
   updateStat("enfants", game.enfants);
+  updateStat("giftsPerChild", game.giftsPerChild);
   updateStat("lutins", game.lutins);
   updateStat("sabotage", game.sabotages);
   updateStat("cdf", game.cdf);

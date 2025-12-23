@@ -1,4 +1,4 @@
-import { game, updateUI } from "./gamelogic.js";
+import { game, updateUI, numberFormatter } from "./gamelogic.js";
 
 const marketingUpgrades = game.upgrades.marketing;
 
@@ -24,9 +24,9 @@ function updateButtonLabel(name) {
 
   const remaining = upgrade.limit - upgrade.current;
   if (remaining <= 0) {
-    btn.textContent = `${upgrade.label} (MAX)`;
+    btn.innerHTML = `${upgrade.label} (MAX)`;
   } else {
-    btn.textContent = `${upgrade.label} (€${upgrade.price})`;
+    btn.innerHTML = `${upgrade.label}`;
   }
 }
 
