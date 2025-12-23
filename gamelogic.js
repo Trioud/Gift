@@ -14,7 +14,7 @@ const endTime = new Date(2025, 11, 25, 0, 0, 0);
 
 export let game = {
   argent: 0,
-  cadeaux: 500000,
+  cadeaux: 50000,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -176,7 +176,7 @@ export let game = {
       },
       nightClub: {
         label: "Faire un nightclub pour les RH",
-        price: 1,
+        price: 5,
         current: 0,
         limit: 1,
         reduction: 0.5,
@@ -330,7 +330,7 @@ window.emballerManuellement = () => {
 };
 
 window.feteRH = () => {
-  if (game.argent > 0) {
+  if (game.argent > 100000) {
     game.cdf += 1;
     game.argent = 0;
     updateUI();
@@ -433,13 +433,14 @@ export function updateMarketingUI() {
 export function updateUI() {
   updateStat("argent", game.argent);
   updateStat("cadeaux", game.cadeaux);
+  updateStat("elfEfficiency", game.elfEfficiency);
   updateStat("enfants", game.enfants);
-  updateStat("giftsPerChild", game.giftsPerChild);
+  updateStat("giftsPerChild", `${game.giftsPerChild}/s`);
   updateStat("lutins", game.lutins);
   updateStat("sabotage", game.sabotages);
   updateStat("cdf", game.cdf);
-  updateStat("lutins_stats", (game.lutins * game.elfEfficiency) / 2);
-  updateStat("argent_stats", (game.enfants * game.eurosPerChild) / 2);
+  updateStat("lutins_stats", game.lutins * game.elfEfficiency);
+  updateStat("argent_stats", game.enfants * game.eurosPerChild);
 
   updateStat("lettres", game.enfants);
 
