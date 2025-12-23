@@ -17,7 +17,7 @@ function updateInstagroomWindow() {
   const win = document.getElementById("instagroom-window");
   if (!win) return;
 
-  if (game.upgrades.marketing.instagroom.current === 1) {
+  if (game.upgrades.marketing.instagroom.current >= 1) {
     win.style.display = "block";
   } else {
     win.style.display = "none";
@@ -37,6 +37,17 @@ function updateMotivationWindow() {
 
 function updateCharcoal() {}
 
+function updateConveyor() {
+  const win = document.getElementById("conveyor-window");
+  if (!win) return;
+
+  if (game.conveyorActive) {
+    win.style.display = "block";
+  } else {
+    win.style.display = "none";
+  }
+}
+
 function updateAllWorkWindow() {
   const win = document.getElementById("allwork-window");
   if (!win) return;
@@ -53,4 +64,5 @@ export function updateGoodies() {
   updateInstagroomWindow();
   updateAllWorkWindow();
   updateMotivationWindow();
+  updateConveyor();
 }

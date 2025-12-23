@@ -616,7 +616,7 @@ export function updateUI() {
   updateStat("cadeaux", game.cadeaux);
   updateStat("elfEfficiency", game.elfEfficiency);
   updateStat("enfants", game.enfants);
-  updateStat("giftsPerChild", `${game.giftsPerChild}/s`);
+  updateStat("giftsPerChild", `${game.giftsPerChild.toFixed(1)}/s`);
   updateStat("lutins", game.lutins);
   updateStat("sabotage", game.sabotageCoins);
   updateStat("cdf", game.cdf);
