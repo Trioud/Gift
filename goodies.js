@@ -35,7 +35,38 @@ function updateMotivationWindow() {
   }
 }
 
-function updateCharcoal() {}
+function updateCharcoal() {
+  const win = document.getElementById("charbon-window");
+  if (!win) return;
+
+  if (game.upgrades.sabotage.charbon.current == 1) {
+    win.style.display = "block";
+  } else {
+    win.style.display = "none";
+  }
+}
+
+function updateBribe() {
+  const win = document.getElementById("bribe-window");
+  if (!win) return;
+
+  if (game.upgrades.sabotage.corruption.current == 1) {
+    win.style.display = "block";
+  } else {
+    win.style.display = "none";
+  }
+}
+
+function updateMadame() {
+  const win = document.getElementById("madame-window");
+  if (!win) return;
+
+  if (game.upgrades.sabotage.casserole.current == 1) {
+    win.style.display = "block";
+  } else {
+    win.style.display = "none";
+  }
+}
 
 function updateConveyor() {
   const win = document.getElementById("conveyor-window");
@@ -65,4 +96,7 @@ export function updateGoodies() {
   updateAllWorkWindow();
   updateMotivationWindow();
   updateConveyor();
+  updateCharcoal();
+  updateBribe();
+  updateMadame();
 }

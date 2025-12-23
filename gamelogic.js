@@ -14,7 +14,7 @@ const endTime = new Date(2025, 11, 25, 0, 0, 0);
 
 export let game = {
   argent: 0,
-  cadeaux: 500000,
+  cadeaux: 5000000,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
