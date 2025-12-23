@@ -67,6 +67,30 @@ export let game = {
       message: "Romeo, Ruben et Martin ont envahi la Galaxy !",
       active: 0,
     },
+    {
+      label: "Mascotte achetée",
+      watch: "upgrades.marketing.mascotte.current",
+      operator: "==",
+      value: "upgrades.marketing.mascotte.limit",
+      message: "Elle est trop belle !",
+      active: 0,
+    },
+    {
+      label: "Influenceur en herbe",
+      watch: "upgrades.marketing.instagroom.current",
+      operator: "==",
+      value: 1,
+      message: "Toujours plus de post !!",
+      active: 0,
+    },
+    {
+      label: "24/24 7j/7",
+      watch: "upgrades.rh.elfSchedule.current",
+      operator: "==",
+      value: "upgrades.rh.elfSchedule.limit",
+      message: "NE REFLECHISSEZ PLUS, EMBALLEZ",
+      active: 0,
+    },
   ],
   upgrades: {
     marketing: {
@@ -195,6 +219,7 @@ export let game = {
 import { availability } from "./availability.js";
 import { checkAchievements, updateAchievementsUI } from "./achievements.js";
 import { updateLettresPhysics } from "./lettre.js";
+import { updateGoodies } from "./goodies.js";
 
 function isWorkHour() {
   if (game.fullTime) return true;
@@ -484,6 +509,7 @@ export function updateUI() {
   }
   availability();
 
+  updateGoodies();
   checkAchievements();
   updateAchievementsUI();
   updateLettresPhysics();
