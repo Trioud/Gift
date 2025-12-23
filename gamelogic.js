@@ -217,9 +217,9 @@ export let game = {
     sabotage: {
       sabotageCoin: {
         label: "Génère un Espion",
-        price: -1,
+        price: 2000000,
         current: 0,
-        limit: 4,
+        limit: 3,
         reduction: 0.5,
       },
       charbon: {
@@ -468,7 +468,7 @@ export function updateUI() {
   updateStat("enfants", game.enfants);
   updateStat("giftsPerChild", game.giftsPerChild);
   updateStat("lutins", game.lutins);
-  updateStat("sabotage", game.sabotages);
+  updateStat("sabotage", game.sabotageCoins);
   updateStat("cdf", game.cdf);
   updateStat("lutins_stats", game.lutins * game.elfEfficiency);
   updateStat("argent_stats", game.enfants * game.eurosPerChild);
