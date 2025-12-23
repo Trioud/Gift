@@ -70,7 +70,11 @@ export function availability() {
 
     const upgrade = sabotageUpgrades[key];
     const current = upgrade.current;
-    const blocked = upgrade.limit <= current || game.argent < upgrade.price;
+    let blocked =
+      upgrade.limit <= current || game.sabotageCoins < upgrade.price;
+    if (key == "sabotageCoin") {
+      blocked = upgrade.limit <= current || upgrade.price > game.argent;
+    }
 
     btn.classList.toggle("disabled", blocked);
     btn.disabled = blocked;

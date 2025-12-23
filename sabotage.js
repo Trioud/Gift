@@ -28,10 +28,10 @@ window.sabotageCoin = () => {
 
 window.charbon = () => {
   buyUpgrade("charbon", () => {
-    console.log(sabotageUpgrades.charbon);
     sabotageUpgrades.charbon.current += 1;
-    game.enfants *= sabotageUpgrades.charbon.reduction;
+    game.cadeaux *= sabotageUpgrades.charbon.reduction;
   });
+  w;
 };
 
 window.corruption = () => {

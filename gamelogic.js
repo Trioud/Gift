@@ -14,7 +14,7 @@ const endTime = new Date(2025, 11, 25, 0, 0, 0);
 
 export let game = {
   argent: 0,
-  cadeaux: 50000,
+  cadeaux: 500000,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -219,7 +219,7 @@ export let game = {
         label: "Génère un Espion",
         price: 2000000,
         current: 0,
-        limit: 3,
+        limit: 8,
         reduction: 0.5,
       },
       charbon: {
@@ -232,17 +232,17 @@ export let game = {
       },
       corruption: {
         label: "Corrompre les lutins du père Noël",
-        price: 1,
+        price: 2,
         current: 0,
         limit: 1,
-        reduction: 1.25,
+        reduction: 1.5,
       },
       casserole: {
         label: "Trouver les casseroles sur Madame Noël",
-        price: 1,
+        price: 3,
         current: 0,
         limit: 1,
-        reduction: 1.25,
+        reduction: 1.75,
       },
     },
   },
@@ -497,16 +497,27 @@ export function updateUI() {
   );
   updateStat(
     "nightClub_stats",
-    `${game.upgrades.rh.nightClub.current} / ${game.upgrades.rh.nightClub.limit} max`
+    `${game.upgrades.rh.nightClub.current}/${game.upgrades.rh.nightClub.limit}`
   );
-  console.log(game.sabotageCoins);
-  updateStat("sabotageCoins_stats", `${game.sabotageCoins}`);
-  updateStat("charbon_stats", `${game.upgrades.sabotage.charbon.current}`);
+  updateStat(
+    "sabotageCoins_stats",
+    `${game.sabotageCoins}/${game.sabotageCoinsLimit}`
+  );
+
+  updateStat(
+    "charbon_stats",
+    `${game.upgrades.sabotage.charbon.current}/${game.upgrades.sabotage.charbon.limit}`
+  );
+
   updateStat(
     "corruption_stats",
-    `${game.upgrades.sabotage.corruption.current}`
+    `${game.upgrades.sabotage.corruption.current}/${game.upgrades.sabotage.corruption.limit}`
   );
-  updateStat("casserole_stats", `${game.upgrades.sabotage.casserole.current}`);
+
+  updateStat(
+    "casserole_stats",
+    `${game.upgrades.sabotage.casserole.current}/${game.upgrades.sabotage.casserole.limit}`
+  );
 
   const time = document.getElementById("horloge");
   const timeParent = time?.parentElement;
