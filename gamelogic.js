@@ -14,7 +14,7 @@ const endTime = new Date(2025, 11, 25, 0, 0, 0);
 
 export let game = {
   argent: 0,
-  cadeaux: 5000000,
+  cadeaux: 5000,
   enfants: 0,
   lutins: 0,
   workStartHour: 6,
@@ -317,9 +317,9 @@ export let game = {
       },
       bribe: {
         label: `Pot-de-vin à l'Éducation National ${numberFormatter.format(
-          1000000000
+          1000000
         )}€<br>Diminue le nombre de cadeaux nécessaire de 0,5 pour avoir une lettre d'enfant`,
-        price: 1000000000,
+        price: 1000000,
         current: 0,
         limit: 1,
         reduction: 0.5,
@@ -499,7 +499,7 @@ window.acheterLutin = () => {
   if (game.argent >= prix) {
     game.argent -= prix;
     game.lutins += 1;
-    game.elfCost = Math.floor(game.elfCost * 1.5);
+    game.elfCost = Math.floor(game.elfCost * 1.2);
     updateUI();
   }
 };
