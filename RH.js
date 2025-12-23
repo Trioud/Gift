@@ -19,6 +19,7 @@ window.elfEfficiency = () => {
   buyUpgrade("elfEfficiency", () => {
     console.log(RHUpgrades.elfEfficiency);
     RHUpgrades.elfEfficiency.current += 1;
+    game.elfEfficiency += 0.5;
   });
 };
 
@@ -51,4 +52,11 @@ window.elfSchedule = () => {
   });
 
   updateUI();
+};
+
+window.nightClub = () => {
+  buyUpgrade("nightClub", () => {
+    console.log(RHUpgrades.nightClub);
+    RHUpgrades.nightClub.current += 1;
+  });
 };

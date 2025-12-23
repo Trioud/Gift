@@ -21,6 +21,7 @@ export let game = {
   workEndHour: 18,
   fullTime: false,
   cdf: 0,
+  lastNightClubMonthGranted: null,
   sabotages: 0,
   giftsPerChild: 5,
   eurosPerChild: 2,
@@ -223,7 +224,19 @@ window.startGame = () => {
   document.getElementById("achievements").style.display = "block";
 
   changeCanvasBackground("./assets/test-background.png");
+  function handleNightClubMonthlyCDF() {
+    // Nightclub must be bought
+    if (game.upgrades.rh.nightClub.current < 1) return;
 
+    const currentMonthKey =
+      game.gameTime.getFullYear() + "-" + game.gameTime.getMonth();
+
+    // Give CDF only once per month
+    if (game.lastNightClubMonthGranted !== currentMonthKey) {
+      game.cdf += 1;
+      game.lastNightClubMonthGranted = currentMonthKey;
+    }
+  }
   let tick = setInterval(() => {
     const activeBg =
       isWorkHour() && game.lutins > 0
@@ -235,6 +248,7 @@ window.startGame = () => {
     }
 
     game.gameTime = addHours(game.gameTime, 1);
+    handleNightClubMonthlyCDF();
     game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
     game.argent += game.enfants * game.eurosPerChild;
 
@@ -411,6 +425,10 @@ export function updateUI() {
   updateStat(
     "elfSchedule_stats",
     `${game.upgrades.rh.elfSchedule.current}/${game.upgrades.rh.elfSchedule.limit}`
+  );
+  updateStat(
+    "nightClub_stats",
+    `${game.upgrades.rh.nightClub.current} / ${game.upgrades.rh.nightClub.limit} max`
   );
   console.log(game.sabotageCoins);
   updateStat("sabotageCoins_stats", `${game.sabotageCoins}`);
