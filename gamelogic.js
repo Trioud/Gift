@@ -351,17 +351,14 @@ function updateStat(id, value, prefix = "", unit = "") {
   }
 }
 
-export function updateUI() {
-  updateStat("argent", game.argent);
-  updateStat("cadeaux", game.cadeaux);
-  updateStat("enfants", game.enfants);
-  updateStat("lutins", game.lutins);
-  updateStat("sabotage", game.sabotages);
-  updateStat("cdf", game.cdf);
-  updateStat("lutins_stats", (game.lutins * game.elfEfficiency) / 2);
-  updateStat("argent_stats", (game.enfants * game.eurosPerChild) / 2);
+export function updateMarketingUI() {
+  const tier = game.marketingTier;
 
-  updateStat("lettres", game.enfants);
+  document.querySelectorAll("[data-required-tier]").forEach((el) => {
+    const required = parseInt(el.getAttribute("data-required-tier"));
+    el.style.display = required <= tier ? "inline" : "none";
+  });
+
   updateStat(
     "mascotte_stats",
     `${game.upgrades.marketing.mascotte.current}/${game.upgrades.marketing.mascotte.limit}`
@@ -382,6 +379,21 @@ export function updateUI() {
     "bribe_stats",
     `${game.upgrades.marketing.bribe.current}/${game.upgrades.marketing.bribe.limit}`
   );
+}
+
+export function updateUI() {
+  updateStat("argent", game.argent);
+  updateStat("cadeaux", game.cadeaux);
+  updateStat("enfants", game.enfants);
+  updateStat("lutins", game.lutins);
+  updateStat("sabotage", game.sabotages);
+  updateStat("cdf", game.cdf);
+  updateStat("lutins_stats", (game.lutins * game.elfEfficiency) / 2);
+  updateStat("argent_stats", (game.enfants * game.eurosPerChild) / 2);
+
+  updateStat("lettres", game.enfants);
+
+  updateMarketingUI();
 
   updateStat("FeteRH_stats", `${game.cdf}`);
   updateStat(

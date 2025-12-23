@@ -23,12 +23,12 @@
           définitivement.
         </p>
 
-          <strong
-            >Utilisez cet outil de planning pour pouvoir vous assurez que les
-            enfants sont plus intéressés par votre projet de livraison que le
-            projet du Père Noël</strong
-          >
-          <h2>DEADLINE 25 décembre à 00:00</h2>
+        <strong
+          >Utilisez cet outil de planning pour pouvoir vous assurez que les
+          enfants sont plus intéressés par votre projet de livraison que le
+          projet du Père Noël</strong
+        >
+        <h2>DEADLINE 25 décembre à 00:00</h2>
         <button onclick="startGame()">Commencer le projet HUB</button>
       </div>
     </div>
@@ -38,13 +38,22 @@
         <img
           src="./assets/santa.png"
           alt="Le Père Noël travaillant à un petit boulot"
-          style="max-width: 100%; max-height: 300px; margin: 20px auto; display: block; border-radius: 10px; object-fit: contain;"
+          style="
+            max-width: 100%;
+            max-height: 300px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            object-fit: contain;
+          "
         />
         <p>
-          Le Père Noël, après avoir reçu très peu de lettres, est parti travailler autre part...
+          Le Père Noël, après avoir reçu très peu de lettres, est parti
+          travailler autre part...
         </p>
         <p>
-          Grâce à votre efficacité, le Projet HUB a totalement remplacé le système de livraison traditionnel.
+          Grâce à votre efficacité, le Projet HUB a totalement remplacé le
+          système de livraison traditionnel.
         </p>
         <h2>🎓 Grade final : <strong>A</strong></h2>
         <button onclick="location.reload()">Rejouer</button>
@@ -54,21 +63,21 @@
       <div class="mission-content">
         <h1>❌ PROJET HUB : ÉCHEC ❌</h1>
         <p>
-          Malgré tous vos efforts, les enfants ont continué à envoyer leurs lettres au Père Noël.
+          Malgré tous vos efforts, les enfants ont continué à envoyer leurs
+          lettres au Père Noël.
         </p>
         <p>
-          Le Projet HUB n'a pas réussi à convaincre le monde... Le Père Noël reprend sa place de leader.
+          Le Projet HUB n'a pas réussi à convaincre le monde... Le Père Noël
+          reprend sa place de leader.
         </p>
         <h2>🎓 Grade final : <strong>E</strong></h2>
         <button onclick="location.reload()">Rejouer</button>
       </div>
     </div>
     <div id="ui">
-      <div class="ui-title">
-        Ressources
-      </div>
+      <div class="ui-title">Ressources</div>
       <div class="ui">
-      <p style="display: none" data-threshold="0">
+        <p style="display: none" data-threshold="0">
           💰 Argent : <span id="argent">0</span>
         </p>
         <p style="display: none" data-threshold="0">
@@ -92,38 +101,73 @@
         <p style="display: none"><span id="horloge">🕣--</span></p>
       </div>
     </div>
-     <div class="window box" style="display: none" id="child" data-world-x="800" data-world-y="50">
+    <div
+      class="window box"
+      style="display: none"
+      id="child"
+      data-world-x="800"
+      data-world-y="50"
+    >
       <div class="title-bar">
         <div class="title-bar-text">Lettre des enfants</div>
         <p style="display: none" data-threshold="0">
-         <span id="lettres">0</span>
+          <span id="lettres">0</span>
         </p>
-        <button onclick="ejectLetters()" style="margin-left: 8px; padding: 2px 8px; font-size: 12px; cursor: pointer;" title="Éjecter les lettres">🗑️</button>
+        <button
+          onclick="ejectLetters()"
+          style="
+            margin-left: 8px;
+            padding: 2px 8px;
+            font-size: 12px;
+            cursor: pointer;
+          "
+          title="Éjecter les lettres"
+        >
+          🗑️
+        </button>
       </div>
-      <div class="window-body" id="lettres-container" style="position: relative; overflow: hidden; min-height: 300px; height: 300px;">
-      </div>
+      <div
+        class="window-body"
+        id="lettres-container"
+        style="
+          position: relative;
+          overflow: hidden;
+          min-height: 300px;
+          height: 300px;
+        "
+      ></div>
     </div>
-    <div class="window box" id="station" style="display: none" data-world-x="380" data-world-y="50">
+    <div
+      class="window box"
+      id="station"
+      style="display: none"
+      data-world-x="380"
+      data-world-y="50"
+    >
       <div class="title-bar">
         <div class="title-bar-text">Station d'emballage</div>
-        <p data-threshold="0">
-        </p>
+        <p data-threshold="0"></p>
       </div>
       <div class="window-body">
-        <p style="padding: 10px 0; margin: 0; font-weight: bold;" id="horairesLutins">Les lutins travaillent de 6h00 à 18h00</p>
+        <p
+          style="padding: 10px 0; margin: 0; font-weight: bold"
+          id="horairesLutins"
+        >
+          Les lutins travaillent de 6h00 à 18h00
+        </p>
         <button onclick="emballerManuellement()">
           Emballer un cadeau (à la main)</button
         ><br />
-        <button onclick="acheterLutin()">Embaucher un TEK1</button> <span id="lutins_stats">0</span> 🎁 /s
+        <button onclick="acheterLutin()">Embaucher un TEK1</button>
+        <span id="lutins_stats">0</span> 🎁 /s
         <button
           data-child-treshold="100"
           style="display: none"
           onclick="conveyorbelt()"
         >
           Acheter un Tapis Roulant (5000€)
-        <br />
-          Augmente l'efficacité de 20% des TEK1
-          </button
+          <br />
+          Augmente l'efficacité de 20% des TEK1</button
         ><br />
       </div>
     </div>
@@ -137,11 +181,20 @@
     >
       <div class="title-bar"><div class="title-bar-text">Marketing</div></div>
       <div class="window-body">
-        <button onclick="mascotte()">Acheter une mascotte<br><span id="mascotte_stats">0</span></button><br>
-        <button onclick="instagroom()">Post Instagroom</button><span id="instagroom_stats">0</span><br />
-        <button onclick="AIadd()">Pub avec de l'IA</button><span id="AIadd_stats" data-required-tier="1">0</span><br>
-        <button onclick="skeletonsCloset()">Casseroles sur le Père Noël</button><span id="skeletonsCloset_stats" data-required-tier="2">0</span><br>
-        <button onclick="bribe()">Pot de vin à l'éducation nationale</button><span id="bribe_stats" data-required-tier="3">0</span><br></br>
+        <button onclick="mascotte()">Acheter une mascotte<br /></button>
+        <span id="mascotte_stats">0</span>
+        <br />
+        <button onclick="instagroom()">Post Instagroom</button>
+        <span id="instagroom_stats">0</span>
+        <br />
+        <button onclick="AIadd()">Pub avec de l'IA</button>
+        <span id="AIadd_stats" data-required-tier="1">0</span>
+        <br />
+        <button onclick="skeletonsCloset()">Casseroles sur le Père Noël</button>
+        <span id="skeletonsCloset_stats" data-required-tier="2">0</span>
+        <br />
+        <button onclick="bribe()">Pot de vin à l'éducation nationale</button>
+        <span id="bribe_stats" data-required-tier="3">0</span><br />
       </div>
     </div>
 
@@ -156,12 +209,22 @@
         <div class="title-bar-text">Département RH</div>
       </div>
       <div class="window-body">
-        <button onclick="feteRH()">Fête des RH</button><span id="FeteRH_stats">0</span><br>
-        <button onclick="elfEfficiency()">Meilleur rendement TEK1</button><span id="elfEfficiency_stats">0</span><br>
-        <button onclick="marketingEfficiency()">Meilleur rendement du service marketing</button><span id="marketingEfficiency_stats">0</span><br>
-        <button onclick="marketingUpgrade()">Amélioration du service marketing</button><span id="marketingUpgrade_stats">0</span><br>
-        <button onclick="elfSchedule()">Augmenter les horaires de travail des TEK1</button><span id="elfSchedule_stats">0</span><br>
-        <button onclick="nightClub()">Construction d'une discothèque pour RH (INTERDIT AUX TEK1)</button><span id="nightClub_stats">0</span><br>
+        <button onclick="feteRH()">Fête des RH</button
+        ><span id="FeteRH_stats">0</span><br />
+        <button onclick="elfEfficiency()">Meilleur rendement TEK1</button
+        ><span id="elfEfficiency_stats">0</span><br />
+        <button onclick="marketingEfficiency()">
+          Meilleur rendement du service marketing</button
+        ><span id="marketingEfficiency_stats">0</span><br />
+        <button onclick="marketingUpgrade()">
+          Amélioration du service marketing</button
+        ><span id="marketingUpgrade_stats">0</span><br />
+        <button onclick="elfSchedule()">
+          Augmenter les horaires de travail des TEK1</button
+        ><span id="elfSchedule_stats">0</span><br />
+        <button onclick="nightClub()">
+          Construction d'une discothèque pour RH (INTERDIT AUX TEK1)</button
+        ><span id="nightClub_stats">0</span><br />
       </div>
     </div>
 
@@ -190,10 +253,16 @@
     >
       <div class="title-bar"><div class="title-bar-text">Sabotage</div></div>
       <div class="window-body">
-        <button onclick="sabotageCoin()">Gagne un sabotage coin</button><span id="sabotageCoins_stats">0</span><br>
-        <button onclick="charbon()">Remplacer avec du charbon les cadeaux du Père Noël</button><span id="charbon_stats">0</span><br>
-        <button onclick="corruption()">Corrompre les lutins du père Noël</button><span id="corruption_stats">0</span><br>
-        <button onclick="casserole()">Trouver les casseroles sur Madame Noël</button><span id="casserole_stats">0</span><br>
+        <button onclick="sabotageCoin()">Gagne un sabotage coin</button
+        ><span id="sabotageCoins_stats">0</span><br />
+        <button onclick="charbon()">
+          Remplacer avec du charbon les cadeaux du Père Noël</button
+        ><span id="charbon_stats">0</span><br />
+        <button onclick="corruption()">Corrompre les lutins du père Noël</button
+        ><span id="corruption_stats">0</span><br />
+        <button onclick="casserole()">
+          Trouver les casseroles sur Madame Noël</button
+        ><span id="casserole_stats">0</span><br />
       </div>
     </div>
 
