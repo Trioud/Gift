@@ -78,6 +78,16 @@ function compare(a, op, b) {
 
 /* -------------------- CHECK -------------------- */
 
+function updateAchievementsCounter() {
+  const titleEl = document.getElementById("achievements-title");
+  if (!titleEl) return;
+
+  const total = game.achievement.length;
+  const unlocked = game.achievement.filter((a) => a.active).length;
+
+  titleEl.textContent = `Achievements ${unlocked} / ${total}`;
+}
+
 export function checkAchievements() {
   let updated = false;
 
@@ -107,7 +117,10 @@ export function checkAchievements() {
     }
   });
 
-  if (updated) updateAchievementsDisplay();
+  if (updated) {
+    updateAchievementsDisplay();
+    updateAchievementsCounter();
+  }
 }
 
 /* -------------------- UI -------------------- */
@@ -149,6 +162,7 @@ function updateAchievementsDisplay() {
 
 export function updateAchievementsUI() {
   updateAchievementsDisplay();
+  updateAchievementsCounter();
 }
 
 window.checkAchievements = checkAchievements;

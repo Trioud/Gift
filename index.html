@@ -248,9 +248,15 @@
       style="display: none"
     >
       <div class="title-bar">
-        <div class="title-bar-text">Achievements</div>
+        <div class="title-bar-text" id="achievements-title">Achievements</div>
       </div>
-      <div class="window-body" id="achievements-list">
+      <div class="window-body" 
+          style="
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 6px;
+    "
+      id="achievements-list">
         <!-- Les achievements seront affichés ici -->
       </div>
     </div>
