@@ -24,6 +24,19 @@ function updateInstagroomWindow() {
   }
 }
 
+function updateMotivationWindow() {
+  const win = document.getElementById("motivation-window");
+  if (!win) return;
+
+  if (game.upgrades.rh.elfEfficiency.current === 1) {
+    win.style.display = "block";
+  } else {
+    win.style.display = "none";
+  }
+}
+
+function updateCharcoal() {}
+
 function updateAllWorkWindow() {
   const win = document.getElementById("allwork-window");
   if (!win) return;
@@ -39,4 +52,5 @@ export function updateGoodies() {
   updateMascotteWindow();
   updateInstagroomWindow();
   updateAllWorkWindow();
+  updateMotivationWindow();
 }

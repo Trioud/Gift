@@ -19,10 +19,11 @@ function buyUpgrade(key, effectFn) {
 }
 
 window.sabotageCoin = () => {
-  buyUpgrade("sabotageCoin", () => {
+  if (game.upgrades.sabotage.sabotageCoin.price <= game.argent) {
     game.sabotageCoins += 1;
-    game.upgrades.sabotage.sabotageCoin.current += 1;
-  });
+    game.argent -= game.upgrades.sabotage.sabotageCoin.price;
+  }
+  game.upgrades.sabotage.sabotageCoin.current += 1;
 };
 
 window.charbon = () => {
