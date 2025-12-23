@@ -1,15 +1,15 @@
 // achievements.js
 import { game } from "./gamelogic.js";
 
-// Liste des toasts actifs
 let activeToasts = [];
+
+/* -------------------- TOAST -------------------- */
 
 function showToast(title, message) {
   const bottomOffset = 20;
-  const spacing = 15; // Espacement fixe entre les toasts
+  const spacing = 15;
   const index = activeToasts.length;
 
-  // Créer le toast
   const toast = document.createElement("div");
   toast.className = "achievement-popup";
   toast.innerHTML = `<h3>🎉 ${title}</h3><p>${message}</p>`;
@@ -17,108 +17,138 @@ function showToast(title, message) {
   activeToasts.push(toast);
   document.body.appendChild(toast);
 
-  // Calculer la position en fonction de la hauteur réelle des toasts précédents
   let totalHeight = bottomOffset;
   for (let i = 0; i < activeToasts.length - 1; i++) {
-    const prevToast = activeToasts[i];
-    if (prevToast.parentNode) {
-      const prevHeight = prevToast.offsetHeight;
-      totalHeight += prevHeight + spacing;
-    }
+    totalHeight += activeToasts[i].offsetHeight + spacing;
   }
   toast.style.bottom = `${totalHeight}px`;
 
-  // Confettis
   setTimeout(() => {
     const rect = toast.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
     const confettiEl = document.createElement("div");
     confettiEl.style.position = "fixed";
-    confettiEl.style.left = `${centerX}px`;
-    confettiEl.style.top = `${centerY}px`;
-    confettiEl.style.width = "1px";
-    confettiEl.style.height = "1px";
-    confettiEl.style.pointerEvents = "none";
+    confettiEl.style.left = rect.left + rect.width / 2 + "px";
+    confettiEl.style.top = rect.top + rect.height / 2 + "px";
     document.body.appendChild(confettiEl);
 
     party.confetti(confettiEl, { count: party.variation.range(30, 50) });
 
-    setTimeout(() => {
-      if (confettiEl.parentNode) document.body.removeChild(confettiEl);
-    }, 1000);
+    setTimeout(() => confettiEl.remove(), 1000);
   }, 50);
 
-  // Supprimer après 5 secondes
   setTimeout(() => {
-    if (toast.parentNode) {
-      toast.classList.add("toast-exit");
-      setTimeout(() => {
-        if (toast.parentNode) {
-          activeToasts = activeToasts.filter((t) => t !== toast);
-          document.body.removeChild(toast);
-          // Réorganiser les toasts restants avec espacement uniforme
-          let currentBottom = bottomOffset;
-          activeToasts.forEach((t) => {
-            if (t.parentNode) {
-              t.style.bottom = `${currentBottom}px`;
-              currentBottom += t.offsetHeight + spacing;
-            }
-          });
-        }
-      }, 300);
-    }
+    toast.classList.add("toast-exit");
+    setTimeout(() => {
+      activeToasts = activeToasts.filter((t) => t !== toast);
+      toast.remove();
+
+      let currentBottom = bottomOffset;
+      activeToasts.forEach((t) => {
+        t.style.bottom = `${currentBottom}px`;
+        currentBottom += t.offsetHeight + spacing;
+      });
+    }, 300);
   }, 5000);
 }
 
-function updateAchievementsDisplay() {
-  const achievementsList = document.getElementById("achievements-list");
-  if (!achievementsList) return;
+/* -------------------- HELPERS -------------------- */
 
-  achievementsList.innerHTML = "";
-
-  game.achievement.forEach((achievement) => {
-    const achievementEl = document.createElement("div");
-    achievementEl.style.marginBottom = "8px";
-    achievementEl.style.padding = "8px";
-    achievementEl.style.border = achievement.active
-      ? "2px solid #4CAF50"
-      : "1px solid #ccc";
-    achievementEl.style.borderRadius = "4px";
-
-    const status = achievement.active
-      ? "✅"
-      : `${game.enfants}/${achievement.threshold}`;
-
-    achievementEl.innerHTML = `
-      <strong>${achievement.active ? "🎉" : "🔒"} ${
-      achievement.label
-    }</strong> - ${status}
-      ${achievement.active ? `<br><small>${achievement.message}</small>` : ""}
-    `;
-
-    achievementsList.appendChild(achievementEl);
-  });
+function getGameValue(path) {
+  return path.split(".").reduce((o, k) => o?.[k], game);
 }
 
+function compare(a, op, b) {
+  switch (op) {
+    case ">=":
+      return a >= b;
+    case "<=":
+      return a <= b;
+    case ">":
+      return a > b;
+    case "<":
+      return a < b;
+    case "==":
+      return a === b;
+    case "!=":
+      return a !== b;
+    default:
+      return false;
+  }
+}
+
+/* -------------------- CHECK -------------------- */
+
 export function checkAchievements() {
-  let hasNewAchievement = false;
-  game.achievement.forEach((achievement) => {
-    if (achievement.active === 0 && game.enfants >= achievement.threshold) {
-      achievement.active = 1;
-      showToast(achievement.label, achievement.message);
-      hasNewAchievement = true;
+  let updated = false;
+
+  game.achievement.forEach((a) => {
+    if (a.active) return;
+
+    // BACKWARD COMPATIBILITY (old achievements)
+    if (a.threshold !== undefined) {
+      if (game.enfants >= a.threshold) {
+        a.active = 1;
+        showToast(a.label, a.message);
+        updated = true;
+      }
+      return;
+    }
+
+    // NEW GENERIC ACHIEVEMENTS
+    if (!a.watch || !a.operator || a.value === undefined) return;
+
+    const left = getGameValue(a.watch);
+    const right = typeof a.value === "string" ? getGameValue(a.value) : a.value;
+
+    if (compare(left, a.operator, right)) {
+      a.active = 1;
+      showToast(a.label, a.message);
+      updated = true;
     }
   });
-  if (hasNewAchievement) {
-    updateAchievementsDisplay();
-  }
+
+  if (updated) updateAchievementsDisplay();
+}
+
+/* -------------------- UI -------------------- */
+
+function updateAchievementsDisplay() {
+  const list = document.getElementById("achievements-list");
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  game.achievement.forEach((a) => {
+    const el = document.createElement("div");
+    el.style.marginBottom = "8px";
+    el.style.padding = "8px";
+    el.style.border = a.active ? "2px solid #4CAF50" : "1px solid #ccc";
+    el.style.borderRadius = "4px";
+
+    let status = "🔒";
+
+    if (!a.active) {
+      if (a.threshold !== undefined) {
+        status = `${game.enfants}/${a.threshold}`;
+      } else {
+        const left = getGameValue(a.watch);
+        const right =
+          typeof a.value === "string" ? getGameValue(a.value) : a.value;
+        status = `${left}/${right}`;
+      }
+    }
+
+    el.innerHTML = `
+      <strong>${a.active ? "🎉" : "🔒"} ${a.label}</strong> - ${status}
+      ${a.active ? `<br><small>${a.message}</small>` : ""}
+    `;
+
+    list.appendChild(el);
+  });
 }
 
 export function updateAchievementsUI() {
   updateAchievementsDisplay();
 }
 
-// Rendre accessible globalement pour le HTML
 window.checkAchievements = checkAchievements;

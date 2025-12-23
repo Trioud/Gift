@@ -132,6 +132,19 @@ canvas {
   padding: 6px 0;
 }
 
+.image-window-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 500px;
+  image-rendering: pixelated;
+}
+
 button {
   background: #0af;
   color: white;
