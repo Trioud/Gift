@@ -32,7 +32,7 @@ export let game = {
   gameStarted: false,
   marketingTier: 0,
   gameEnded: false,
-  sabotageCoins: 100,
+  sabotageCoins: 0,
   achievement: [
     {
       label: "100 lettres d'enfants",
@@ -81,6 +81,38 @@ export let game = {
       operator: "==",
       value: 1,
       message: "Toujours plus de post !!",
+      active: 0,
+    },
+    {
+      label: "Marketing au top !",
+      watch: "upgrades.rh.marketingUpgrade.current",
+      operator: "==",
+      value: "upgrades.rh.marketingUpgrade.limit",
+      message: "Améliorer le pôle Marketing au max grâce à vos RH",
+      active: 0,
+    },
+    {
+      label: "Tapis Roulant",
+      watch: "conveyorActive",
+      operator: "==",
+      value: true,
+      message: "C'est un Tapis roulant ce truc ?",
+      active: 0,
+    },
+    {
+      label: "Dance to forget",
+      watch: "upgrades.rh.nightClub.current",
+      operator: "==",
+      value: 1,
+      message: "INTERDIT AUX TEK1 !",
+      active: 0,
+    },
+    {
+      label: "Efficace ces TEK1 !",
+      watch: "upgrades.rh.elfEfficiency.current",
+      operator: "==",
+      value: 1,
+      message: "Le confort rapport le réconfort",
       active: 0,
     },
     {
@@ -184,7 +216,7 @@ export let game = {
     },
     sabotage: {
       sabotageCoin: {
-        label: "Gagne un Sabotage Coin",
+        label: "Génère un Espion",
         price: -1,
         current: 0,
         limit: 4,
@@ -438,8 +470,8 @@ export function updateUI() {
   updateStat("lutins", game.lutins);
   updateStat("sabotage", game.sabotages);
   updateStat("cdf", game.cdf);
-  updateStat("lutins_stats", (game.lutins * game.elfEfficiency) / 2);
-  updateStat("argent_stats", (game.enfants * game.eurosPerChild) / 2);
+  updateStat("lutins_stats", game.lutins * game.elfEfficiency);
+  updateStat("argent_stats", game.enfants * game.eurosPerChild);
 
   updateStat("lettres", game.enfants);
 
