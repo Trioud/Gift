@@ -105,7 +105,7 @@ export let game = {
         requiredTier: 0,
       },
       instagroom: {
-        label: `Faire designer une mascotte ${numberFormatter.format(
+        label: `Post Instagroom ${numberFormatter.format(
           45000
         )}€<br>Diminue le nombre de cadeaux nécessaire de 0,1 pour avoir une lettre d'enfant`,
         price: 45000,
@@ -115,7 +115,7 @@ export let game = {
         requiredTier: 0,
       },
       AIadd: {
-        label: `Post Instagroom ${numberFormatter.format(
+        label: `Créer une publicité avec de l'IA ${numberFormatter.format(
           80000
         )}€<br>Diminue le nombre de cadeaux nécessaire de 0,5 pour avoir une lettre d'enfant`,
         price: 80000,
