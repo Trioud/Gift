@@ -7,6 +7,7 @@ import {
 } from "https://cdn.skypack.dev/date-fns@2.30.0";
 import { toggleConvoyer } from "./conveyor.js";
 import { finishGame } from "./finalcondition.js";
+import { saveGame, initSaveSystem, saveGame } from "./saveSystem.js";
 
 export const numberFormatter = new Intl.NumberFormat("fr-FR");
 
@@ -397,10 +398,12 @@ export let game = {
   },
 };
 
+initSaveSystem(game)
 import { availability } from "./availability.js";
 import { checkAchievements, updateAchievementsUI } from "./achievements.js";
 import { updateLettresPhysics } from "./lettre.js";
 import { updateGoodies } from "./goodies.js";
+
 
 function isWorkHour() {
   if (game.fullTime) return true;
@@ -492,6 +495,7 @@ window.conveyorbelt = () => {
     updateUI();
   }
   updateUI();
+  saveGame(game);
 };
 
 window.acheterLutin = () => {
@@ -501,6 +505,7 @@ window.acheterLutin = () => {
     game.lutins += 1;
     game.elfCost = Math.floor(game.elfCost * 1.2);
     updateUI();
+    saveGame(game);
   }
 };
 
@@ -508,6 +513,7 @@ window.emballerManuellement = () => {
   game.cadeaux += 1;
   game.enfants = Math.floor(game.cadeaux / game.giftsPerChild);
   updateUI();
+  saveGame(game);
 };
 
 window.feteRH = () => {
@@ -515,6 +521,7 @@ window.feteRH = () => {
     game.cdf += 1;
     game.argent = 0;
     updateUI();
+    saveGame(game);
   }
 };
 
@@ -523,6 +530,7 @@ window.utiliserSabotage = () => {
     game.sabotages += 1;
     game.cdf -= 5;
     updateUI();
+    saveGame(game);
   }
 };
 

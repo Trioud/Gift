@@ -44,6 +44,7 @@ function buyUpgrade(name) {
     updateButtonLabel(name);
     updateMarketingButtonsVisibility();
     updateUI();
+    saveGame();
   }
 }
 

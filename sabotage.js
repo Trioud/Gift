@@ -1,4 +1,5 @@
 import { game, updateUI } from "./gamelogic.js";
+import { saveGame } from "./saveSystem.js";
 
 const sabotageUpgrades = game.upgrades.sabotage;
 
@@ -16,6 +17,7 @@ function buyUpgrade(key, effectFn) {
 
   effectFn();
   updateUI();
+  saveGame();
 }
 
 window.sabotageCoin = () => {
