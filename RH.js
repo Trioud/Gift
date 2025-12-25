@@ -13,7 +13,7 @@ function buyUpgrade(key, effectFn) {
 
   effectFn();
   updateUI();
-  autoSave();
+  saveGame(game);
 }
 
 window.elfEfficiency = () => {
