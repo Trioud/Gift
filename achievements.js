@@ -120,7 +120,7 @@ export function checkAchievements() {
   if (updated) {
     updateAchievementsDisplay();
     updateAchievementsCounter();
-    saveGame();
+    saveGame(game);
   }
 }
 

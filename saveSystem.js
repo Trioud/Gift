@@ -11,6 +11,8 @@ function saveGame(gameObject) {
     console.log('[SaveSystem] Game saved immediately');
   }
 }
+
+// deprecated
 function autoSave(gameObject) {
   if (saveTimeout) {
     clearTimeout(saveTimeout);
@@ -30,15 +32,15 @@ function initSaveSystem(gameObject) {
   const localState = localStorage.getItem('gameState');
   if (localState) {
     const gameState = deserializeGameState(localState)
-    if (!gameState) return
+    if (!gameState) return false
 
     Object.assign(gameObject, gameState);
     console.log('[SaveSystem] Game loaded from local storage');
-    return;
+    return true;
   }
   console.log('[SaveSystem] No save found, starting new game');
 }
 
 
 
-export { saveGame, loadGame, autoSave, initSaveSystem };
+export { saveGame, autoSave, initSaveSystem };

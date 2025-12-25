@@ -17,7 +17,7 @@ function buyUpgrade(key, effectFn) {
 
   effectFn();
   updateUI();
-  saveGame();
+  saveGame(game);
 }
 
 window.sabotageCoin = () => {

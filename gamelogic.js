@@ -7,7 +7,7 @@ import {
 } from "https://cdn.skypack.dev/date-fns@2.30.0";
 import { toggleConvoyer } from "./conveyor.js";
 import { finishGame } from "./finalcondition.js";
-import { saveGame, initSaveSystem, saveGame } from "./saveSystem.js";
+import { saveGame, initSaveSystem, autoSave } from "./saveSystem.js";
 
 export const numberFormatter = new Intl.NumberFormat("fr-FR");
 
@@ -398,7 +398,7 @@ export let game = {
   },
 };
 
-initSaveSystem(game)
+const haveSave = initSaveSystem(game)
 import { availability } from "./availability.js";
 import { checkAchievements, updateAchievementsUI } from "./achievements.js";
 import { updateLettresPhysics } from "./lettre.js";
@@ -481,6 +481,8 @@ window.startGame = () => {
     }
     updateUI();
   }, 1000);
+
+  autoSave(game)
 };
 
 window.conveyorbelt = () => {
